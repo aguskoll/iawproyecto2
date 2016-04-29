@@ -1,0 +1,5 @@
+_assetic:
+    resource: .
+    type: assetic
+_app:
+    resource: 'C:\Users\tino\Desktop\Uni\iaw\proyectosSymphony\symfony_demo\app/config/routing_dev.yml'
