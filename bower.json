@@ -1,0 +1,13 @@
+{
+  "name": "prueba",
+  "description": "Bower proyecto 2",
+  "main": "",
+  "authors": [
+    "seba"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}

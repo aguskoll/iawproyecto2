@@ -1,9 +1,12 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_url: 'sqlite:///%kernel.root_dir%/data/blog.sqlite'
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: symfony
+    database_user: root
+    database_password: null
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
-    locale: en
-    secret: secret_value_for_symfony_demo_application
+    secret: 9862ce0c2856e6a706bff0877e7e1cdd072efe9f
