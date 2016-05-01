@@ -1,5 +1,5 @@
 {
-    "name": "sebalr/prueba",
+    "name": "sebalr/ala",
     "license": "proprietary",
     "type": "project",
     "autoload": {
@@ -24,7 +24,8 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
-        "symfony/phpunit-bridge": "~2.7"
+        "symfony/phpunit-bridge": "~2.7",
+        "doctrine/doctrine-fixtures-bundle": "^2.3"
     },
     "scripts": {
         "post-install-cmd": [

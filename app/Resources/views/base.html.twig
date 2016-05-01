@@ -36,7 +36,11 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+              <li><a class="link" href="{{ path('logout') }}">Logout</a></li>
+            {% else %}
+              <li><a class="link" href="{{ path('loginForm') }}">Login</a></li>
+            {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -45,8 +49,7 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">{% block body %}{% endblock %}</p>
+        {% block body %}{% endblock %}</p>
       </div>
 
     </div><!-- /.container -->
