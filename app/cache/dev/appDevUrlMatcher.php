@@ -119,9 +119,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
         }
 
-        // mostrarTodos
-        if ($pathinfo === '/mostrarPartidos') {
-            return array (  '_controller' => 'AppBundle\\Controller\\DefaultUserController::mostrarTodosPartidosAction',  '_route' => 'mostrarTodos',);
+        if (0 === strpos($pathinfo, '/mostrar')) {
+            // mostrarEquipos
+            if ($pathinfo === '/mostrarEquipos') {
+                return array (  '_controller' => 'AppBundle\\Controller\\DefaultUserController::mostrarEquiposAction',  '_route' => 'mostrarEquipos',);
+            }
+
+            // mostrarTodos
+            if ($pathinfo === '/mostrarPartidos') {
+                return array (  '_controller' => 'AppBundle\\Controller\\DefaultUserController::mostrarTodosPartidosAction',  '_route' => 'mostrarTodos',);
+            }
+
         }
 
         if (0 === strpos($pathinfo, '/log')) {

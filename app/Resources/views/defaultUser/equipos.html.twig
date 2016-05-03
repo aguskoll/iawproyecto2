@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Equipos participantes:</h1>
+
+    
+       
+    <table border="1" >
+        
+        <ul id="navigation">
+           
+            {% for e in equipos %}
+               
+                 <tr>
+                     <td>    Nombre: {{ e.getNombre() }}</td>
+                      <td>    Origen: {{ e.getOrigen()  }} </td>
+                           
+                    
+                 </tr>
+            {% endfor %}
+        </ul>
+ </table>
+{% endblock %}
