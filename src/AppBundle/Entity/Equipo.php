@@ -62,6 +62,11 @@ class Equipo {
    function setOrigen($origen) {
        $this->origen = $origen;
    }
-
-
+/*
+ * constructor publico
+ * **/
+   public function __construct()
+    {
+       
+    }
 }
