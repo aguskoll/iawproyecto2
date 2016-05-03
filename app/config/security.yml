@@ -3,7 +3,7 @@
 security:
     providers:
         user:
-            entity: { class: AppBundle:User, property: username }
+            entity: { class: AppBundle:User}
     encoders:
         AppBundle\Entity\User:
             algorithm: bcrypt
@@ -22,5 +22,5 @@ security:
 
     access_control:
         - { path: ^/admin, roles: [ROLE_ADMIN] }
-        - { path: ^/editor, roles: [ROLE_EDITOR]}
+        - { path: ^/editor, roles: [ROLE_EDITOR,ROLE_ADMIN]}
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

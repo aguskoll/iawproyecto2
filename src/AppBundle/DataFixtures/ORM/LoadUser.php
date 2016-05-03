@@ -11,13 +11,22 @@ class LoadUsers extends ContainerAware implements FixtureInterface{
 	protected $container;
 
 	public function load(ObjectManager $manager){
-		$user = new User();
-		$user->setUsername('darth');
-		$user->setPassword($this->encodePassword($user, 'darthpass'));
-		$user->setEmail('death@star.com');
-		$manager->persist($user);
+		$admin = new User();
+		$admin->setUsername('darth');
+		$admin->setPassword($this->encodePassword($admin, 'darthpass'));
+		$admin->setEmail('death@star.com');
+		$admin->setRoles(array('ROLE_ADMIN'));
+		$manager->persist($admin);
 
-		$manager->flush();
+	    $editor = new User();
+	    $editor->setUsername('wayne');
+	    $editor->setPassword($this->encodePassword($editor, 'waynepass'));
+	    $editor->setRoles(array('ROLE_EDITOR'));
+	    $editor->setEmail('wayne@star.com');
+	    $manager->persist($editor);
+
+	    $manager->flush();
+
 	}
 
     private function encodePassword(User $user, $plainPassword){

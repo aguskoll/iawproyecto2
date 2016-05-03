@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User implements UserInterface
+class User implements UserInterface, Serializable
 {
     /**
      * @var int
@@ -42,6 +42,10 @@ class User implements UserInterface
      */
     private $email;
 
+    /**
+    * @ORM\Column(type="json_array")
+    */
+    private $roles = array();
 
     /**
      * Get id
@@ -122,10 +126,21 @@ class User implements UserInterface
         return $this->email;
     }
 
-    public function getRoles(){
-        return array('ROLE_USER');//Cableado
+    public function getRoles()
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
+    public function setRoles(array $roles)
+    {
+        $this->roles = $roles;
+
+        // allows for chaining
+        return $this;
+    }
     public function eraseCredentials()
     {
         // blank for now
@@ -134,5 +149,15 @@ class User implements UserInterface
     public function getSalt()
     {
         return null;
+    }
+
+    public function serialize()
+    {
+        // todo - do some mad serialization
+    }
+
+    public function unserialize($serialized)
+    {
+        // todo - and some equally angry de-serialization
     }
 }
