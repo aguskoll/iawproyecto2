@@ -1,9 +1,9 @@
 <?php
-namespace AppBundle\Entity\ORM;
+namespace UserBundle\Entity\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use AppBundle\Entity\User;
+use UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
 class LoadUsers extends ContainerAware implements FixtureInterface{

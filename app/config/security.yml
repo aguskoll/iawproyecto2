@@ -3,7 +3,7 @@
 security:
     providers:
         user:
-            entity: { class: AppBundle:User}
+            entity: { class: UserBundle:User}
     encoders:
         AppBundle\Entity\User:
             algorithm: bcrypt

@@ -1,14 +1,15 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace UserBundle\Entity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Serializable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  */
 class User implements UserInterface, Serializable
 {
@@ -153,11 +154,19 @@ class User implements UserInterface, Serializable
 
     public function serialize()
     {
-        // todo - do some mad serialization
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+        ));
     }
 
     public function unserialize($serialized)
     {
-        // todo - and some equally angry de-serialization
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+        ) = unserialize($serialized);
     }
 }
