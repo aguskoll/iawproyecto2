@@ -1,0 +1,18 @@
+{% extends '/default/admin.html.twig' %}
+
+{% block form %}
+
+<section class="main-block">
+    <article>
+        <section>
+            <h1>Register</h1>
+
+           <form action="{{ path('createTeam') }}" method="POST">
+{{ form_errors(form) }}
+    {{ form_row(form.nombre) }}
+    {{ form_row(form.origen) }}
+     {{ form_rest(form) }}
+    <input type="submit" class="btn btn-primary pull-right" value="Register!" />
+</form>
+</section>
+{% endblock %}
