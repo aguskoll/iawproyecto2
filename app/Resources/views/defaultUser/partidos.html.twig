@@ -12,12 +12,16 @@
             {% for p in partidos %}
                
                  <tr>
-                     <td>    Equipo1: {{ p.getEquipo1() }}</td>
-                      <td>    Equipo2: {{ p.getEquipo2()  }} </td>
-                           {% if p.getTermino() %}
-                             <td>Ganador: {{p.getEquipoGanador()}}</td>
-                             <td>Puntos Equipo1: {{p.getPuntosEquipo1()}}</td>
-                             <td> Puntos Equipo2: {{p.getPuntosEquipo2()}}</td>
+                     <td>    Equipo1: {{ p.getEquipo1().getNombre() }}</td>
+                      <td>    Equipo2: {{ p.getEquipo2().getNombre()  }} </td>
+                          {% if p.getTermino() %}
+                             <td> Puntos Equipo1: {{ p.getPuntosEquipo1()}}</td>
+                             <td> Puntos Equipo2: {{ p.getPuntosEquipo2()}}</td>
+                              {%if p.getPuntosEquipo1()> p.getPuntosEquipo2() %} 
+                                     <td>Ganador: Equipo 1 </td>
+                              {% else  %} 
+                                    <td>Ganador: Equipo 2 </td>
+                              {% endif %} 
                            {% endif %}
                     
                  </tr>

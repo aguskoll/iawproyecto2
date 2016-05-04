@@ -34,13 +34,15 @@ class Partido {
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string")
+     /**
+     * @ORM\OneToOne(targetEntity="Equipo")
+     * @ORM\JoinColumn(name="equipo1", referencedColumnName="id")
      */
     private $equipo1;
 
      /**
-     * @ORM\Column(type="string")
+     * @ORM\OneToOne(targetEntity="Equipo")
+     * @ORM\JoinColumn(name="equipo2", referencedColumnName="id")
      */
     private $equipo2;
 
@@ -49,23 +51,19 @@ class Partido {
      */
     private $termino;
     
-    /**
-     * @ORM\Column(type="string")
-     * 
-     */
-    private $equipoGanador;
+    
    
     /**
      * @ORM\Column(type="integer")
      * 
      */
-    private $puntosEquipo1;
+    private $puntosEquipo1=0;
     
     /**
      * @ORM\Column(type="integer")
      * 
      */
-    private $puntosEquipo2;
+    private $puntosEquipo2=0;
     
     
     function getId() {
@@ -83,11 +81,20 @@ class Partido {
     function getTermino() {
         return $this->termino;
     }
-
+/*
     function getEquipoGanador() {
-        return $this->equipoGanador;
+        
+        if( $this->getPuntosEquipo1() > $this->getPuntosEquipo2())
+        {   
+            return  $this->$equipo1;
+        }
+        else {
+            return  $this->$equipo2;
+            
+        }
+       
     }
-
+*/
     function getPuntosEquipo1() {
         return $this->puntosEquipo1;
     }
@@ -112,9 +119,6 @@ class Partido {
         $this->termino = $termino;
     }
 
-    function setEquipoGanador($equipoGanador) {
-        $this->equipoGanador = $equipoGanador;
-    }
 
     function setPuntosEquipo1($puntosEquipo1) {
         $this->puntosEquipo1 = $puntosEquipo1;
