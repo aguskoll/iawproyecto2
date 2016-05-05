@@ -1,6 +1,6 @@
 {% extends '/default/admin.html.twig' %}
 
-{% block form %}
+{% block body %}
 
 <section class="main-block">
     <article>
@@ -8,11 +8,11 @@
             <h1>Register</h1>
 
            <form action="{{ path('createTeam') }}" method="POST">
-{{ form_errors(form) }}
+    {{ form_errors(form) }}
     {{ form_row(form.nombre) }}
     {{ form_row(form.origen) }}
      {{ form_rest(form) }}
-    <input type="submit" class="btn btn-primary pull-right" value="Register!" />
+    <input type="submit" class="btn btn-primary pull-right" value="Registrar!" />
 </form>
 </section>
 {% endblock %}

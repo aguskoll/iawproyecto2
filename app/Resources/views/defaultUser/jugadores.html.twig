@@ -1,0 +1,22 @@
+{# empty Twig template #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Jugadores participantes:</h1>
+         <table border="1" >
+        
+        <ul id="navigation">
+           
+            {% for j in jugadores %}
+               
+                 <tr>        <td> Nombre: {{j.getNombre()}}</td>
+                             <td> Equipo1: {{ j.getEquipo().getNombre() }}</td>
+                              <td> Equipo: {{ j.getEquipo().getNombre()}}</td> 
+                             <td> Puntos: {{ j.getPuntos()}}</td>
+                             <td> Asistencias: {{ j.getAsistencias()}}</td>
+                             <td> Defensas: {{ j.getDefensas()}}</td>
+                 </tr>
+            {% endfor %}
+        </ul>
+ </table>
+{% endblock %}

@@ -13,13 +13,13 @@
 namespace AppBundle\Entity;
 
 
-
+use UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
- /**
+
+/**
  * @ORM\Entity
  * @ORM\Table(name="partido")
  */
-
 class Partido {
     
     function __construct() {
@@ -63,9 +63,24 @@ class Partido {
      * @ORM\Column(type="integer")
      * 
      */
+   
     private $puntosEquipo2=0;
     
+    /** ORM\OneToOne(targetEntity="UserBundle\Entity\User")
+     *  ORM\JoinColumn(name="editor", referencedColumnName="id")
+     */
+    private $editor;
     
+    function getEditor() {
+        return $this->editor;
+    }
+
+    function setEditor($editor) {
+        $this->editor = $editor;
+    }
+
+     
+
     function getId() {
         return $this->id;
     }

@@ -35,8 +35,8 @@ class DefaultUserController extends Controller {
         if (!$equipos) {
             throw $this->createNotFoundException('No se encontro ningun equipo ');
         }
-
-//debug:    echo '<html><body>cant equipos'.count($equipos).'</body></html>';
+//debug:
+ //   echo '<html><body>cant equipos'.count($equipos).'</body></html>';
         return
                 $this->render('defaultUser/equipos.html.twig', array('equipos' => $equipos));
     }
@@ -82,10 +82,29 @@ class DefaultUserController extends Controller {
         }
 
         //debug:
-        // echo '<html><body>cant partidos'.count($partidos).'</body></html>';
+      //   echo '<html><body>cant partidos'.count($partidos).'</body></html>';
 
         return
                 $this->render('defaultUser/partidos.html.twig', array('partidos' => $partidos));
     }
+   
+    /**
+     * Muestra todos los jugadores participantes del torneo 
+     * @Route("/mostrarJugadores", name="mostrarJugadores")
+     */
+    public function mostrarJugadoresAction() {
+        $jugadores= $this->getDoctrine()
+                ->getRepository('AppBundle:Jugador')
+                ->findAll();
 
+        if (!$jugadores) {
+            throw $this->createNotFoundException(
+                    'No hay partidos '
+            );
+        }
+//debug:
+      //   echo '<html><body>cant jug'.count($jugadores).'</body></html>';
+        return
+                $this->render('defaultUser/jugadores.html.twig', array('jugadores' => $jugadores));
+    }
 }

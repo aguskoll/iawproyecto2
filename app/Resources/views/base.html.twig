@@ -20,7 +20,7 @@
      </head>
 
   <body>
-
+  
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -33,26 +33,32 @@
           <a class="navbar-brand " >Torneo Raza: ultimate fresbee bahia blanca </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav  ">
+        
+            {% block navList %}
+            <ul class="nav navbar-nav  ">
            
               <li class="active link "><a href="{{path('mostrarTodos')}}">Partidos</a></li>
-           
               <li class="active link "><a href="{{path('mostrarEquipos')}}">Equipos Participantes</a></li>
-           
-            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+              <li class="active link "><a href="{{path('mostrarJugadores')}}">Jugadores</a></li>
+            
+              {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
               <li><a class="link " href="{{ path('logout') }}">Logout</a></li>
-            {% else %}
+              <li><a class="link " href="{{ path('createTeam') }}">CrearEquipo</a></li>
+              <li><a class="link " href="{{ path('editorPage') }}">Espacio editor</a></li>
+              {% else %}
               <li><a class="link " href="{{ path('loginForm') }}">Login</a></li>
             {% endif %}
           </ul>
+           {% endblock %}
+       
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
+         
     <div class="container">
 
       <div class="starter-template">
-        {% block titulo %}{% endblock %}
+        {% block body %}{% endblock %}
       </div>
 
     </div><!-- /.container -->

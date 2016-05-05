@@ -138,11 +138,32 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'AppBundle\\Controller\\DefaultUserController::mostrarTodosPartidosAction',  '_route' => 'mostrarTodos',);
             }
 
+            // mostrarJugadores
+            if ($pathinfo === '/mostrarJugadores') {
+                return array (  '_controller' => 'AppBundle\\Controller\\DefaultUserController::mostrarJugadoresAction',  '_route' => 'mostrarJugadores',);
+            }
+
         }
 
-        // editorPage
-        if ($pathinfo === '/editor') {
-            return array (  '_controller' => 'AppBundle\\Controller\\EditorController::adminAction',  '_route' => 'editorPage',);
+        if (0 === strpos($pathinfo, '/editor')) {
+            // editorPage
+            if ($pathinfo === '/editor') {
+                return array (  '_controller' => 'AppBundle\\Controller\\EditorController::adminAction',  '_route' => 'editorPage',);
+            }
+
+            if (0 === strpos($pathinfo, '/editor/cargar')) {
+                // editarJugadores
+                if ($pathinfo === '/editor/cargarEstadisticasJugadores') {
+                    return array (  '_controller' => 'AppBundle\\Controller\\EditorController::editarJugadoresAction',  '_route' => 'editarJugadores',);
+                }
+
+                // editarPartidos
+                if ($pathinfo === '/editor/cargarResultados') {
+                    return array (  '_controller' => 'AppBundle\\Controller\\EditorController::editarPartidosAction',  '_route' => 'editarPartidos',);
+                }
+
+            }
+
         }
 
         if (0 === strpos($pathinfo, '/log')) {

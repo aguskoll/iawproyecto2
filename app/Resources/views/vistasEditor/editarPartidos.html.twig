@@ -1,0 +1,25 @@
+{# empty Twig template #}
+{% extends 'default/editor.html.twig' %}
+
+{% block body %}
+    <h1>Partidos:</h1>
+
+    
+       
+    <table border="1" >
+        
+        <ul id="navigation">
+           
+            {% for p in partidos %}
+               
+                 <tr>
+                     <td>    Equipo1: {{ p.getEquipo1().getNombre() }}</td>
+                      <td>    Equipo2: {{ p.getEquipo2().getNombre()  }} </td>
+                      <td> {{ form(form) }} </td>  
+                        
+                    
+                 </tr>
+            {% endfor %}
+        </ul>
+ </table>
+{% endblock %}

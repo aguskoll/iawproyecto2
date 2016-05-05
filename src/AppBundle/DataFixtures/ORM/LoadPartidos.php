@@ -29,6 +29,9 @@ class LoadPartidos extends  AbstractFixture implements OrderedFixtureInterface{
         $equipo1=$this->getReference('equipo1');
         $partido->setEquipo1($this->getReference('equipo1'));
         $partido->setEquipo2($this->getReference('equipo2'));
+        
+       // $partido->setEditor($this->getReference('editor'));
+        
         $partido->setPuntosEquipo1(15);
         $partido->setPuntosEquipo2(10);
         $partido->setTermino(true);
@@ -40,7 +43,7 @@ class LoadPartidos extends  AbstractFixture implements OrderedFixtureInterface{
     {
         // es el orden en que se cargan los fixtures, menor numero significa que carga primero
         //se carga segunda
-        return 2;
+        return 4;
     }
    
  }

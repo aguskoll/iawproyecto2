@@ -1,7 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block titulo %}
-EDITOR PLACE<br>
-{% block form %}
+
+
+{% block navList %}
+              <li class="active link "><a href="{{path('editarPartidos')}}">Cargar resultados</a></li>
+              <li class="active link "><a href="{{path('editarJugadores')}}">Cargar estadisticas de jugadores</a></li>
+              
 {% endblock %}
-{% endblock %}
+
