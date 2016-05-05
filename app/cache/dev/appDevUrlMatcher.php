@@ -105,9 +105,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // adminPage
-        if ($pathinfo === '/admin') {
-            return array (  '_controller' => 'AppBundle\\Controller\\AdminController::adminAction',  '_route' => 'adminPage',);
+        if (0 === strpos($pathinfo, '/admin')) {
+            // adminPage
+            if ($pathinfo === '/admin') {
+                return array (  '_controller' => 'AppBundle\\Controller\\AdminController::adminAction',  '_route' => 'adminPage',);
+            }
+
+            // createTeam
+            if ($pathinfo === '/admin/teamForm') {
+                return array (  '_controller' => 'AppBundle\\Controller\\AdminController::crearEquipo',  '_route' => 'createTeam',);
+            }
+
         }
 
         // homepage
@@ -130,6 +138,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'AppBundle\\Controller\\DefaultUserController::mostrarTodosPartidosAction',  '_route' => 'mostrarTodos',);
             }
 
+        }
+
+        // editorPage
+        if ($pathinfo === '/editor') {
+            return array (  '_controller' => 'AppBundle\\Controller\\EditorController::adminAction',  '_route' => 'editorPage',);
         }
 
         if (0 === strpos($pathinfo, '/log')) {
