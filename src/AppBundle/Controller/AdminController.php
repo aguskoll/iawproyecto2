@@ -33,7 +33,7 @@ class AdminController extends Controller
         if ($form->isValid()) {
             $data = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
+            $em->persist($equipo);
             $em->flush();
 
             return $this->redirectToRoute('adminPage');
