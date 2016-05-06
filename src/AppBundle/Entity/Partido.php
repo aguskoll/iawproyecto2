@@ -38,7 +38,7 @@ class Partido {
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $comentario;
+    private $comentario="vacio";
 
      /**
      * @ORM\OneToOne(targetEntity="Equipo")
@@ -64,7 +64,7 @@ class Partido {
     private $editor;
    
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      * 
      */
     private $puntosEquipo1=0;

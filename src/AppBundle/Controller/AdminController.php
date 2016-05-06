@@ -56,7 +56,7 @@ class AdminController extends Controller
     public function mostrarPartidosEditores() {
          $partidos = $this->getDoctrine()
                 ->getRepository('AppBundle:Partido')
-                ->findAll();
+                ->findById(8);
                 var_dump($partidos);die;
 
         $editores = $this->getDoctrine()
