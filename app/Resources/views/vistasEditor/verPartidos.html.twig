@@ -1,0 +1,28 @@
+{# empty Twig template #}
+{% extends 'default/editor.html.twig' %}
+
+{% block body %}
+    <h1>Partidos:</h1>
+
+    
+       
+    <table border="1" >
+        
+        <ul id="navigation">
+           
+            {% for p in partidos %}
+               
+                 <tr>
+                     <td>    Equipo1: {{ p.getEquipo1().getNombre() }} Puntos: {{ p.getPuntosEquipo1()  }}</td>
+                      <td>    Equipo2: {{ p.getEquipo2().getNombre()  }}Puntos: {{ p.getPuntosEquipo2()  }}  </td>
+                      
+                    
+                      <td>  <a href="{{path('updateResultados',{'idPartido': p.getId }) }}" class=" btn btn-sm btn-primary" > 
+                      {{'cargar resultado'|trans}}
+                      </a>  
+                      </td>
+                 </tr>
+            {% endfor %}
+        </ul>
+ </table>
+{% endblock %}

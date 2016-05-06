@@ -4,10 +4,16 @@
 
     <table border="1" >
         <ul id="navigation">
-            {% for e in equipos %}
+            {% for p in partidos %}
                  <tr>
-                     <td>    Nombre: {{ e.getNombre() }}</td>
-                      <td>    Origen: {{ e.getOrigen()  }} </td>
+                     <td>    {{ p.getEquipo1() }}</td>
+                      <td>   [{ p.getEquipo2()  }} </td>
+                       <td><select>
+                       	{% for e in editores %}
+ 						<option value='{{ e.getId() }}'>{{ e.getUsername() }}</option>
+                       			{% endfor %}
+                       </select>
+                        </td>
                  </tr>
             {% endfor %}
         </ul>

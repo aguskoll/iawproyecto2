@@ -1,17 +1,4 @@
-CREATE TABLE `user` (
-	`id` INT( 255 ) AUTO_INCREMENT NOT NULL,
-	`username` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	`password` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	`email` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	`roles` VARCHAR( 25 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	`gravatar` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	`active` TINYINT( 1 ) NOT NULL,
-	 PRIMARY KEY ( `id` )
-	 );
+update partido set editor_id=22 where id=2;
 
-
-INSERT INTO `user`
-(`username`, `password`, `email`, `roles`, `active`)
-VALUES ('root', '$2a$12$3INF/uK0.pmZAMFW0In0uOrfpq.yaVIK0xwmWO8Yjxhs4m8CC1Ei2', 'root@somewhere.com', 'ROLE_ADMIN', '1');
-
-password test
+insert into partido (equipo1, equipo2) values (8,9);
+insert into partido (equipo1, equipo2) values (9,8);

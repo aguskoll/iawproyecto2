@@ -53,21 +53,22 @@ class AdminController extends Controller
      * @Route("/admin/asignarEditor", name="asignarEditor")
      *
      */
-    public function mostrarEquiposEditores() {
-        $equipos = $this->getDoctrine()
-                ->getRepository('AppBundle:Equipo')
+    public function mostrarPartidosEditores() {
+         $partidos = $this->getDoctrine()
+                ->getRepository('AppBundle:Partido')
                 ->findAll();
+                var_dump($partidos);die;
 
         $editores = $this->getDoctrine()
                 ->getRepository('UserBundle:User')
                 ->findByEsEditor(1);
-        var_dump($editores);die;
+                
 
-        if (!$equipos) {
-            throw $this->createNotFoundException('No se encontro ningun equipo ');
+        if (!$partidos) {
+            throw $this->createNotFoundException('No se encontro ningun partido sin editores');
         }
         return
-                $this->render('forms/asignarEditorForm.html.twig', array('equipos' => $equipos,
+                $this->render('forms/asignarEditorForm.html.twig', array('partidos' => $partidos,
                                                                         'editores' => $editores));
     }
 }

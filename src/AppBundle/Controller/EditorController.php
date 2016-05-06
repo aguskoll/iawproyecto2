@@ -30,37 +30,46 @@ class EditorController extends Controller
     }
     
      /**
-     * @Route("/editor/cargarResultados", name="editarPartidos")
+     * @Route("/editor/cargarResultados", name="cargarResultados")
      */
-    public function editarPartidosAction(Request $request)
+    public function cargarResultadosAction(Request $request)
     {   
         $partidos = $this->getDoctrine()
                 ->getRepository('AppBundle:Partido')
                 ->findAll();
-               // ->findByTerminado($terminado);
-        //despues se tiene q filtarr por los q puede editar
-        $form = $this->createFormBuilder($partidos)
+   
+        return 
+        $this->render('vistasEditor/verPartidos.html.twig', array('partidos' => $partidos));
+    
+    }
+    
+    /**
+     * @Route("/editor/updateResultados/{idPartido}", name="updateResultados")
+     */
+     public function updateResultadosAction($idPartido, Request $request)
+    {  
+     $em=$this->getDoctrine()->getManager();
+     $partido = $em->getRepository('AppBundle:Partido')
+                ->find($idPartido);
+     if(!$partido){
+         
+         throw $this->createNotFoundException('partido no encontrado');
+     }
+     $form=$this->createFormBuilder($partido)
             ->add('puntosEquipo1', 'integer')
             ->add('puntosEquipo2', 'integer')
-            ->add('idPartido', 'integer')
             ->add('guardar', 'submit')
             ->getForm();
-      //  echo '<html><body>cant partidos'.count($partidos).'</body></html>';
-       
-         $form->handleRequest($request);
-        
-            $data=$form->getData();
-         if ($form->isValid()) {
-              
-             $data2=$form->getData('idPartido');
-               echo '<html><body>data'.count($data2).'data: '.$data2[2].'</body></html>';
-               echo '<html><body>todo bien</body></html>';
-       //   echo '<html><body>data'todo bien'</body></html>';
-         //  return $this->redirect($this->generateUrl('task_success'));
-    }
-        return 
-        $this->render('vistasEditor/editarPartidos.html.twig', array('partidos' => $partidos, 'form' => $form->createView()));
-    
+      
+       $form->handleRequest($request); 
+ 
+        if ($form->isValid()&&$form->isSubmitted()) { 
+            $this->addFlash('mensaje', 'El resultado se guardo correctamente');
+            $em->flush(); 
+            return $this->redirectToRoute('cargarResultados'); 
+        } 
+     
+   return  $this->render('vistasEditor/editarResultado.html.twig', array('partidos' => $partido, 'form' => $form->createView()));
     }
     
     

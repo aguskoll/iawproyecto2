@@ -118,7 +118,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
             // asignarEditor
             if ($pathinfo === '/admin/asignarEditor') {
-                return array (  '_controller' => 'AppBundle\\Controller\\AdminController::mostrarEquiposEditores',  '_route' => 'asignarEditor',);
+                return array (  '_controller' => 'AppBundle\\Controller\\AdminController::mostrarPartidosEditores',  '_route' => 'asignarEditor',);
             }
 
         }
@@ -162,11 +162,16 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return array (  '_controller' => 'AppBundle\\Controller\\EditorController::editarJugadoresAction',  '_route' => 'editarJugadores',);
                 }
 
-                // editarPartidos
+                // cargarResultados
                 if ($pathinfo === '/editor/cargarResultados') {
-                    return array (  '_controller' => 'AppBundle\\Controller\\EditorController::editarPartidosAction',  '_route' => 'editarPartidos',);
+                    return array (  '_controller' => 'AppBundle\\Controller\\EditorController::cargarResultadosAction',  '_route' => 'cargarResultados',);
                 }
 
+            }
+
+            // updateResultados
+            if (0 === strpos($pathinfo, '/editor/updateResultados') && preg_match('#^/editor/updateResultados/(?P<idPartido>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'updateResultados')), array (  '_controller' => 'AppBundle\\Controller\\EditorController::updateResultadosAction',));
             }
 
         }

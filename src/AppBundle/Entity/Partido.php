@@ -64,7 +64,7 @@ class Partido {
     private $editor;
    
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * 
      */
     private $puntosEquipo1=0;
@@ -150,5 +150,27 @@ class Partido {
     }
 
 
-}    
 
+    /**
+     * Set comentario
+     *
+     * @param string $comentario
+     * @return Partido
+     */
+    public function setComentario($comentario)
+    {
+        $this->comentario = $comentario;
+
+        return $this;
+    }
+
+    /**
+     * Get comentario
+     *
+     * @return string 
+     */
+    public function getComentario()
+    {
+        return $this->comentario;
+    }
+}
