@@ -6,8 +6,8 @@
         <ul id="navigation">
             {% for p in partidos %}
                  <tr>
-                     <td>    {{ p.getEquipo1() }}</td>
-                      <td>   [{ p.getEquipo2()  }} </td>
+                     <td>     Equipo1: {{ p.getEquipo1().getNombre() }}</td>
+                      <td>    Equipo2: {{ p.getEquipo2().getNombre()  }} </td>
                        <td><select>
                        	{% for e in editores %}
  						<option value='{{ e.getId() }}'>{{ e.getUsername() }}</option>

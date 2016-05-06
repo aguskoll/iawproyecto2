@@ -54,16 +54,13 @@ class AdminController extends Controller
      *
      */
     public function mostrarPartidosEditores() {
-         $partidos = $this->getDoctrine()
-                ->getRepository('AppBundle:Partido')
-                ->findAll();
+        $partidos = $this->getDoctrine()
+                        ->getRepository('AppBundle:Partido')
+                        ->findByEditor(NULL);
 
-                var_dump($partidos);die;
-
-        $editores = $this->getDoctrine()
+                $editores = $this->getDoctrine()
                 ->getRepository('UserBundle:User')
                 ->findByEsEditor(1);
-                
 
         if (!$partidos) {
             throw $this->createNotFoundException('No se encontro ningun partido sin editores');
