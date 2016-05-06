@@ -56,6 +56,11 @@ class User implements UserInterface, Serializable
     private $roles = array();
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Partido", mappedBy="editor")
+     */
+    private $partidos;
+
+    /**
      * Get id
      *
      * @return integer 

@@ -58,7 +58,7 @@ class Partido {
     private $termino;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="partido")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="partidos")
      * @ORM\JoinColumn(name="editor_id", referencedColumnName="id")
      */
     private $editor;
