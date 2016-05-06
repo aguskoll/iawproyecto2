@@ -34,6 +34,12 @@ class Partido {
      */
     private $id;
 
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $comentario;
+
      /**
      * @ORM\OneToOne(targetEntity="Equipo")
      * @ORM\JoinColumn(name="equipo1", referencedColumnName="id")
@@ -50,8 +56,12 @@ class Partido {
      * @ORM\Column(type="boolean")
      */
     private $termino;
-    
-    
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="partido")
+     * @ORM\JoinColumn(name="editor_id", referencedColumnName="id")
+     */
+    private $editor;
    
     /**
      * @ORM\Column(type="integer")
@@ -65,11 +75,7 @@ class Partido {
      */
    
     private $puntosEquipo2=0;
-    
-    /** ORM\OneToOne(targetEntity="UserBundle\Entity\User")
-     *  ORM\JoinColumn(name="editor", referencedColumnName="id")
-     */
-    private $editor;
+
     
     function getEditor() {
         return $this->editor;

@@ -1,0 +1,15 @@
+{% extends '/default/admin.html.twig' %}
+
+{% block body %}
+
+    <table border="1" >
+        <ul id="navigation">
+            {% for e in equipos %}
+                 <tr>
+                     <td>    Nombre: {{ e.getNombre() }}</td>
+                      <td>    Origen: {{ e.getOrigen()  }} </td>
+                 </tr>
+            {% endfor %}
+        </ul>
+ </table>
+{% endblock %}

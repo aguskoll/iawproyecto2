@@ -48,4 +48,26 @@ class AdminController extends Controller
         ));
 
     }
+
+    /**
+     * @Route("/admin/asignarEditor", name="asignarEditor")
+     *
+     */
+    public function mostrarEquiposEditores() {
+        $equipos = $this->getDoctrine()
+                ->getRepository('AppBundle:Equipo')
+                ->findAll();
+
+        $editores = $this->getDoctrine()
+                ->getRepository('UserBundle:User')
+                ->findByRole('EDITOR');
+        var_dump($editores);die;
+
+        if (!$equipos) {
+            throw $this->createNotFoundException('No se encontro ningun equipo ');
+        }
+        return
+                $this->render('forms/asignarEditorForm.html.twig', array('equipos' => $equipos,
+                                                                        'editores' => $editores));
+    }
 }

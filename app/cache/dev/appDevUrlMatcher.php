@@ -116,6 +116,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'AppBundle\\Controller\\AdminController::crearEquipo',  '_route' => 'createTeam',);
             }
 
+            // asignarEditor
+            if ($pathinfo === '/admin/asignarEditor') {
+                return array (  '_controller' => 'AppBundle\\Controller\\AdminController::mostrarEquiposEditores',  '_route' => 'asignarEditor',);
+            }
+
         }
 
         // homepage
