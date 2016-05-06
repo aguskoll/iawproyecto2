@@ -60,7 +60,7 @@ class AdminController extends Controller
 
         $editores = $this->getDoctrine()
                 ->getRepository('UserBundle:User')
-                ->findByRole('EDITOR');
+                ->findByEsEditor(1);
         var_dump($editores);die;
 
         if (!$equipos) {

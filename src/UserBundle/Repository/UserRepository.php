@@ -55,22 +55,6 @@ class UserRepository extends EntityRepository implements UserProviderInterface{
         return $refreshedUser;
     }
 
-    /**
-     * @param string $role
-     *
-     * @return array
-     */
-    public function findByRole($role)//No anda
-    {
-
-        return $this->createQueryBuilder('u')
-        ->where('u.roles LIKE :roles')
-        ->setParameter('roles', 'ROLE_ADMIN')
-        ->getQuery()
-        ->getOneOrNullResult()
-        ;
-    }
-
     public function supportsClass($class)
     {
         return $this->getEntityName() === $class

@@ -23,6 +23,13 @@ class User implements UserInterface, Serializable
     private $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="esEditor", type="smallint",  nullable=true)
+     */
+    private $esEditor;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255, unique=true)
@@ -57,6 +64,31 @@ class User implements UserInterface, Serializable
     {
         return $this->id;
     }
+
+
+    /**
+     * Get editor
+     *
+     * @return integer 
+     */
+    public function getEsEditor()
+    {
+        return $this->esEditor;
+    }
+
+        /**
+     * Set editor
+     *
+     * @param int $editor
+     * @return User
+     */
+    public function setEsEditor($editor)
+    {
+        $this->esEditor = $editor;
+
+        return $this;
+    }
+
 
     /**
      * Set username
