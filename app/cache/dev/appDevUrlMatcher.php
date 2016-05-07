@@ -121,6 +121,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'AppBundle\\Controller\\AdminController::mostrarPartidosEditores',  '_route' => 'asignarEditor',);
             }
 
+            // vincularEditor
+            if (0 === strpos($pathinfo, '/admin/vincularEditor') && preg_match('#^/admin/vincularEditor/(?P<idPartido>[^/]++)/(?P<idEditor>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'vincularEditor')), array (  '_controller' => 'AppBundle\\Controller\\AdminController::vincularEditorAction',));
+            }
+
         }
 
         // homepage

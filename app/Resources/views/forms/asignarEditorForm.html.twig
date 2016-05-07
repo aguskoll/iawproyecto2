@@ -8,11 +8,14 @@
                  <tr>
                      <td>     Equipo1: {{ p.getEquipo1().getNombre() }}</td>
                       <td>    Equipo2: {{ p.getEquipo2().getNombre()  }} </td>
-                       <td><select>
+                       <td><select id='{{p.getId}}' onchange= 'select(this.id, this.value)'>
                        	{% for e in editores %}
  						<option value='{{ e.getId() }}'>{{ e.getUsername() }}</option>
                        			{% endfor %}
                        </select>
+                        </td>
+                        <td>
+                          <a id='r_{{p.getId}}' href='{{ path('vincularEditor', {'idPartido': p.getId(), 'idEditor': editores|first.getId}) }}'>asignar</a>
                         </td>
                  </tr>
             {% endfor %}

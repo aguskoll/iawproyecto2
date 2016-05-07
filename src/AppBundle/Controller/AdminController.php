@@ -69,4 +69,10 @@ class AdminController extends Controller
                 $this->render('forms/asignarEditorForm.html.twig', array('partidos' => $partidos,
                                                                         'editores' => $editores));
     }
+
+    /**
+     * @Route("/admin/vincularEditor/{idPartido}/{idEditor}", name="vincularEditor")
+     */
+     public function vincularEditorAction($idPartido,$idEditor)
+    {  }
 }
