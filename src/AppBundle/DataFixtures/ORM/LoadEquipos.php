@@ -25,12 +25,17 @@ class LoadEquipos extends AbstractFixture implements OrderedFixtureInterface{
         $this->addReference('equipo1', $equipo1);
         $manager->persist($equipo1);
      
-        $equipo2 = new Equipo();
+         $equipo2 = new Equipo();
          $equipo2->setNombre("UTA");
          $equipo2 ->setOrigen("Tres arroyos");
-       $this->addReference('equipo2', $equipo2);
+         $this->addReference('equipo2', $equipo2);
          $manager->persist($equipo2);
         
+         $equipo3 = new Equipo();
+         $equipo3->setNombre("ULP");
+         $equipo3 ->setOrigen("La plata");
+         $this->addReference('equipo3', $equipo3);
+         $manager->persist($equipo3);
        
         $manager->flush();
     }

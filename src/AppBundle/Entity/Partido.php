@@ -22,9 +22,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Partido {
     
-    function __construct() {
-        
-    }
+    
 
     
     /**
@@ -40,17 +38,19 @@ class Partido {
      */
     private $comentario="vacio";
 
+ 
+      /**
+   * @ORM\ManyToMany(targetEntity="Equipo", inversedBy="partidos")
+   * @ORM\JoinTable(name="partidos_equipos")
+   **/
+    private $equipos;
+ 
+   
      /**
-     * @ORM\OneToOne(targetEntity="Equipo")
-     * @ORM\JoinColumn(name="equipo1", referencedColumnName="id")
+     * OneToOne(targetEntity="Equipo")
+     * JoinColumn(name="equipo2", referencedColumnName="id")
      */
-    private $equipo1;
-
-     /**
-     * @ORM\OneToOne(targetEntity="Equipo")
-     * @ORM\JoinColumn(name="equipo2", referencedColumnName="id")
-     */
-    private $equipo2;
+   // private $equipo2;
 
     /**
      * @ORM\Column(type="boolean")
@@ -92,11 +92,11 @@ class Partido {
     }
 
     function getEquipo1() {
-        return $this->equipo1;
+        return $this->equipos[0];
     }
 
     function getEquipo2() {
-        return $this->equipo2;
+        return $this->equipos[1];
     }
 
     function getTermino() {
@@ -129,11 +129,11 @@ class Partido {
     }
 
     function setEquipo1($equipo1) {
-        $this->equipo1 = $equipo1;
+        $this->equipos[0] = $equipo1;
     }
 
     function setEquipo2($equipo2) {
-        $this->equipo2 = $equipo2;
+        $this->equipos[1] = $equipo2;
     }
 
     function setTermino($termino) {
@@ -172,5 +172,9 @@ class Partido {
     public function getComentario()
     {
         return $this->comentario;
+    }
+    
+    function __construct() {
+         $this->equipos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }

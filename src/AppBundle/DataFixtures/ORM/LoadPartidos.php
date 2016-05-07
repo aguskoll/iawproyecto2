@@ -26,7 +26,7 @@ class LoadPartidos extends  AbstractFixture implements OrderedFixtureInterface{
     public function load(ObjectManager $manager){
         $partido = new Partido();
       
-        $equipo1=$this->getReference('equipo1');
+    
         $partido->setEquipo1($this->getReference('equipo1'));
         $partido->setEquipo2($this->getReference('equipo2'));
         
@@ -36,7 +36,23 @@ class LoadPartidos extends  AbstractFixture implements OrderedFixtureInterface{
         $partido->setPuntosEquipo2(10);
         $partido->setTermino(true);
         $manager->persist($partido);
-          $manager->flush();
+        /*
+        $partido2 = new Partido();
+        $partido2->setEquipo1($this->getReference('equipo1'));
+        $partido2->setEquipo2($this->getReference('equipo3'));
+        
+       // $partido->setEditor($this->getReference('editor'));
+        
+        $partido2->setPuntosEquipo1(5);
+        $partido2->setPuntosEquipo2(13);
+        $partido2->setTermino(true);
+         * 
+        
+        $manager->persist($partido2);
+        */
+        
+        
+        $manager->flush();
          
     }
     public function getOrder()

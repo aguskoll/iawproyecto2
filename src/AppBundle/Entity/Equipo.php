@@ -36,6 +36,20 @@ class Equipo {
      */
    private $nombre; 
    
+   /**
+   * @ORM\ManyToMany(targetEntity="Partido", mappedBy="equipos")
+   **/
+     private $partidos;
+     
+   function getPartidos() {
+        return $this->partidos;
+    }
+
+    function setPartidos($partidos) {
+        $this->partidos = $partidos;
+    }
+
+    
     /**
      * @ORM\Column(type="string", length=100)
      */
@@ -69,6 +83,6 @@ class Equipo {
  * **/
    public function __construct()
     {
-       
+       $this->partidos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }
