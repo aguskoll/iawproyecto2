@@ -30,6 +30,7 @@ class LoadJugadores extends  AbstractFixture implements OrderedFixtureInterface{
         $jugador->setDefensas(5);
         $jugador->setDefensas(3);
         $jugador->setNombre("Agus");
+       
         
         $jugador2 = new Jugador();
         $jugador2->setEquipo($this->getReference('equipo2'));
@@ -37,6 +38,7 @@ class LoadJugadores extends  AbstractFixture implements OrderedFixtureInterface{
         $jugador2->setDefensas(5);
         $jugador2->setDefensas(3);
         $jugador2->setNombre("Pepe");
+        
         
         $manager->persist($jugador2);
         $manager->persist($jugador);

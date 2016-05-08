@@ -28,18 +28,18 @@ class LoadUsers extends  ContainerAware implements  FixtureInterface{
 	    $editor->setRoles(array('ROLE_EDITOR'));
 	    $editor->setEsEditor(1);
 	    $editor->setEmail('wayne@star.com');
-	    
+	    $this->addReference('editor1', $editor);
            // $this->addReference('editor', $editor);
             
             $manager->persist($editor);
 
 	    $editor = new User();
 	    $editor->setUsername('wayne2');
-	   $editor->setPassword($this->encodePassword($editor, 'waynepass2'));
+	    $editor->setPassword($this->encodePassword($editor, 'waynepass2'));
 	    $editor->setRoles(array('ROLE_EDITOR'));
 	    $editor->setEsEditor(1);
 	    $editor->setEmail('wayne2@star.com');
-	    
+	     $this->addReference('editor2', $editor);
            
             $manager->persist($editor);
             $manager->flush();

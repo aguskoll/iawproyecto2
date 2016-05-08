@@ -30,20 +30,34 @@ class EditorController extends Controller
     }
     
      /**
+      * cargarResultadosAction: muestra todos los partidos que el editor puede cargar resultados
      * @Route("/editor/cargarResultados", name="cargarResultados")
      */
     public function cargarResultadosAction(Request $request)
     {   
+       
+         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) 
+        {
+             throw $this->createAccessDeniedException();
+        }
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $userName=$user->getUsername();
+        $userId = $user->getId();
+      
+        echo '<html><body>usuario nombre:'.$userName.'</body></html>';
+        echo '<html><body>usuario id:'.$userId.'</body></html>';
+        
         $partidos = $this->getDoctrine()
                 ->getRepository('AppBundle:Partido')
-                ->findAll();
-   
+                ->findByEditor($userId);
+        
         return 
         $this->render('vistasEditor/verPartidos.html.twig', array('partidos' => $partidos));
     
     }
     
     /**
+     * le asigna a un partido, el resultado 
      * @Route("/editor/updateResultados/{idPartido}", name="updateResultados")
      */
      public function updateResultadosAction($idPartido, Request $request)
