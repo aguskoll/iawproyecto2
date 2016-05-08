@@ -4,6 +4,9 @@
 
     <table border="1" >
         <ul id="navigation">
+        {% if partidos is empty%}
+          No hay partidos
+          {% else %}
             {% for p in partidos %}
                  <tr>
                      <td>     Equipo1: {{ p.getEquipo1().getNombre() }}</td>
@@ -15,10 +18,11 @@
                        </select>
                         </td>
                         <td>
-                          <a id='r_{{p.getId}}' href='{{ path('vincularEditor', {'idPartido': p.getId(), 'idEditor': editores|first.getId}) }}'>asignar</a>
+                          <a id='r_{{p.getId}}' href='{{ path('vincularEditor', {'idPartido': p.getId(), 'idEditor': editores|first.getId}) }}' onclick="return confirm('Asignar editor al partido?')">asignar</a>
                         </td>
                  </tr>
             {% endfor %}
+            {% endif %}
         </ul>
  </table>
 {% endblock %}

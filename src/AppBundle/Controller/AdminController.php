@@ -61,10 +61,6 @@ class AdminController extends Controller
                 $editores = $this->getDoctrine()
                 ->getRepository('UserBundle:User')
                 ->findByEsEditor(1);
-
-        if (!$partidos) {
-            throw $this->createNotFoundException('No se encontro ningun partido sin editores');
-        }
         return
                 $this->render('forms/asignarEditorForm.html.twig', array('partidos' => $partidos,
                                                                         'editores' => $editores));
@@ -74,5 +70,18 @@ class AdminController extends Controller
      * @Route("/admin/vincularEditor/{idPartido}/{idEditor}", name="vincularEditor")
      */
      public function vincularEditorAction($idPartido,$idEditor)
-    {  }
+    {
+         $em = $this->getDoctrine()->getManager();
+        $partido = $em->getRepository('AppBundle:Partido')->find($idPartido);
+        $editor = $em->getRepository('UserBundle:User')->find($idEditor);
+        if (!$partido||!$editor) {
+            throw $this->createNotFoundException(
+                'No existe el partido o editor seleccionado' );
+        }
+
+        $partido->setEditor($editor);
+        $em->flush();
+
+        return $this->redirectToRoute('asignarEditor');
+         }
 }
