@@ -5,6 +5,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
 class TeamFormType extends AbstractType
@@ -16,7 +17,8 @@ class TeamFormType extends AbstractType
 public function buildForm(FormBuilderInterface $builder, array $options){
     $builder
         ->add('nombre', TextType::class)
-        ->add('origen', TextType::class,array('required' => false));
+        ->add('origen', TextType::class,array('required' => false))
+        ->add('logo', FileType::class, array('label' => 'logo (imagen)'));
 }
 
 

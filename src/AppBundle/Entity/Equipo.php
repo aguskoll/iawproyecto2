@@ -64,6 +64,32 @@ class Equipo {
      */
     protected $jugadores;
    
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\File(
+     * mimeTypes={ "image/jpeg", "image/png", "image/gif" },
+     * maxSize = "1024k")
+     * @Assert\Image(
+     *     minWidth = 300,
+     *     maxWidth = 300,
+     *     minHeight = 300,
+     *     maxHeight = 300
+     * )
+     */
+    private $logo;
+
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
     function getJugadores() {
         return $this->jugadores;
     }

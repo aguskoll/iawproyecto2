@@ -6,10 +6,11 @@
     <article>
         <section>
             <h1>Register</h1>
-           <form action="{{ path('createTeam') }}" method="POST" novalidate="novalidate">
+           <form action="{{ path('createTeam') }}" method="POST" novalidate="novalidate" enctype="multipart/form-data">
     {{ form_errors(form) }}
     {{ form_row(form.nombre) }}
     {{ form_row(form.origen) }}
+    {{ form_row(form.logo) }}
      {{ form_rest(form) }}
     <input type="submit" class="btn btn-primary pull-right" value="Registrar!" />
 </form>

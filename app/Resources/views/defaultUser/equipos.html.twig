@@ -14,6 +14,12 @@
                  <tr>
                      <td>    Nombre: {{ e.getNombre() }}</td>
                       <td>    Origen: {{ e.getOrigen()  }} </td>
+                       {% if e.logo is not null and e.logo is not empty %}
+
+                      <td><a href="{{ asset('uploads/logos/' ~ e.logo) }}">View logo</a>
+                       {% endif %}
+                       </td>
+
                            
                     
                  </tr>
