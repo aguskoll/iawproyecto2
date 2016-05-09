@@ -1,0 +1,42 @@
+{# empty Twig template #}
+{% extends 'default/editor.html.twig' %}
+
+{% block body %}
+    <h1>Jugadores:</h1>
+    <h4>Equipo: {{equipo1.getNombre()}}</h4>
+    <table border="1" >
+        
+        <ul id="navigation">
+           
+            {% for j in jugadoresEquipo1%}
+               
+                 <tr>
+                     <td>    Nombre: {{ j.getNombre() }}  </td>
+                      <td>
+                       <form action="{{path('asignarEstadisticas', {'idPartido': p.getId()}}" method="POST">
+                               
+                        <input type="submit" class="btn btn-primary pull-right" value="guardar" />
+                        
+                         {#{ <a id='r_{{j.getId()}}' href='{{ path('asignarEstadisticas', {'idPartido': p.getId()}}' >
+                              Guardar estadistica</a>}#}
+                        </td>
+                 </tr>
+            {% endfor %}
+        </ul>
+ </table>
+<h4>Equipo: {{equipo2.getNombre()}}</h4>
+    <table border="1" >
+        
+        <ul id="navigation">
+           
+            {% for j in jugadoresEquipo2%}
+               
+                 <tr>
+                     <td>    Nombre: {{ j.getNombre() }}  </td>
+                     
+                 </tr>
+            {% endfor %}
+        </ul>
+ </table>
+{% endblock %}
+

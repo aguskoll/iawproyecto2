@@ -21,6 +21,12 @@
                       {{'cargar resultado'|trans}}
                       </a>  
                       </td>
+                      
+                       <td>  
+                        <a href="{{path('editarJugadores',{'idPartido': p.getId }) }}" class=" btn btn-sm btn-primary" > 
+                        {{'cargar estadisticas de jugadores'|trans}}
+                         </a>  
+                      </td>
                  </tr>
             {% endfor %}
         </ul>

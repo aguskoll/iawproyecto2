@@ -33,6 +33,24 @@ class Jugador {
      * 
      */
    private $puntos=0;
+       /**
+     * @ORM\Column(type="integer")
+     * 
+     */
+   private $asistencias=0;
+  
+   /**
+     * @ORM\ManyToOne(targetEntity="Equipo",inversedBy="jugadores" )
+     * @ORM\JoinColumn(name="jugadores_equipo", referencedColumnName="id")
+     */
+   private $equipo;
+    
+   
+   /**
+     * @ORM\Column(type="integer")
+     * 
+     */
+   private $defensas=0;
    
    function getId() {
        return $this->id;
@@ -82,23 +100,7 @@ class Jugador {
        $this->defensas = $defensas;
    }
 
-       /**
-     * @ORM\Column(type="integer")
-     * 
-     */
-   private $asistencias=0;
-  
-   /**
-     * @ORM\OneToOne(targetEntity="Equipo")
-     * @ORM\JoinColumn(name="equipo", referencedColumnName="id")
-     */
-   private $equipo;
-    
-   /**
-     * @ORM\Column(type="integer")
-     * 
-     */
-   private $defensas=0;
+   
    
    function __construct() {
         

@@ -28,7 +28,7 @@ class LoadPartidos extends  AbstractFixture implements OrderedFixtureInterface{
         $partido->setEquipo1($this->getReference('equipo1'));
         $partido->setEquipo2($this->getReference('equipo2'));
         
-        $partido->setEditor($this->getReference('editor1'));
+        //$partido->setEditor($this->getReference('editor1'));
         
         $partido->setPuntosEquipo1(15);
         $partido->setPuntosEquipo2(10);
@@ -41,7 +41,7 @@ class LoadPartidos extends  AbstractFixture implements OrderedFixtureInterface{
         $partido2->setPuntosEquipo1(5);
         $partido2->setPuntosEquipo2(13);
         $partido2->setTermino(true);
-        $partido2->setEditor($this->getReference('editor1'));
+       // $partido2->setEditor($this->getReference('editor1'));
         $manager->persist($partido2);
         
         
@@ -51,7 +51,7 @@ class LoadPartidos extends  AbstractFixture implements OrderedFixtureInterface{
         $partido3->setPuntosEquipo1(5);
         $partido3->setPuntosEquipo2(13);
         $partido3->setTermino(true);
-          $partido3->setEditor($this->getReference('editor1'));
+        //  $partido3->setEditor($this->getReference('editor1'));
         $manager->persist($partido3);
         
         $partido4 = new Partido();
@@ -60,7 +60,7 @@ class LoadPartidos extends  AbstractFixture implements OrderedFixtureInterface{
         $partido4->setPuntosEquipo1(5);
         $partido4->setPuntosEquipo2(13);
         $partido4->setTermino(true);
-        $partido4->setEditor($this->getReference('editor2'));
+        //$partido4->setEditor($this->getReference('editor2'));
         $manager->persist($partido4);
         
         $partido5 = new Partido();
