@@ -9,6 +9,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Description of Equipo
@@ -19,6 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="equipo")
+ * @UniqueEntity(fields="nombre", message="Ya existe un equipo con ese nombre")
  */
 class Equipo {
    
@@ -33,6 +36,7 @@ class Equipo {
   
    /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Debe tener un nombre")
      */
    private $nombre; 
    

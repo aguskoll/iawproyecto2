@@ -6,8 +6,7 @@
     <article>
         <section>
             <h1>Register</h1>
-
-           <form action="{{ path('createTeam') }}" method="POST">
+           <form action="{{ path('createTeam') }}" method="POST" novalidate="novalidate">
     {{ form_errors(form) }}
     {{ form_row(form.nombre) }}
     {{ form_row(form.origen) }}
