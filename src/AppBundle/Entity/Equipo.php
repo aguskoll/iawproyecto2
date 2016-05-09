@@ -55,7 +55,20 @@ class Equipo {
      */
    private $origen;//de donde es
    
-   function getId() {
+    /**
+     * @ORM\OneToMany(targetEntity="Jugador", mappedBy="equipo")
+     */
+    protected $jugadores;
+   
+    function getJugadores() {
+        return $this->jugadores;
+    }
+
+    function setJugadores($jugadores) {
+        $this->jugadores = $jugadores;
+    }
+
+       function getId() {
        return $this->id;
    }
 
@@ -84,5 +97,7 @@ class Equipo {
    public function __construct()
     {
        $this->partidos = new \Doctrine\Common\Collections\ArrayCollection();
+    
+        $this->jugadores = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }
