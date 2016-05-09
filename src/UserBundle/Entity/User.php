@@ -3,6 +3,8 @@
 namespace UserBundle\Entity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Serializable;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
+ * @UniqueEntity(fields="username", message="Ya existe ese usario")
+ * @UniqueEntity(fields="email", message="Ya existe ese mail")
  */
 class User implements UserInterface, Serializable
 {
@@ -31,15 +35,17 @@ class User implements UserInterface, Serializable
 
     /**
      * @var string
+     *@Assert\Length(min=3)
+     *@Assert\NotBlank(message="Nombre de usuario requerido")
+     *@ORM\Column(name="username", type="string", length=255, unique=true)
      *
-     * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     private $username;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
+     *@Assert\NotBlank message=("Password requerida")
+     *@ORM\Column(name="password", type="string", length=255)
      */
     private $password;
 

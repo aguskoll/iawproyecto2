@@ -37,7 +37,10 @@ class AdminController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($equipo);
             $em->flush();
-
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add('success', 'Equipo creado')
+                ;
             return $this->redirectToRoute('adminPage');
 
         }
