@@ -18,7 +18,7 @@
                        </select>
                         </td>
                         <td>
-                          <a id='r_{{p.getId}}' href='{{ path('vincularEditor', {'idPartido': p.getId(), 'idEditor': editores|first.getId}) }}' onclick="return confirm('Asignar editor al partido?')">asignar</a>
+                          <a id='r_{{p.getId}}' href='{{ path('vincularEditor', {'idPartido': p.getId(), 'idEditor': editores|first.getId } ) }}' onclick="return confirm('Asignar editor al partido?')">asignar</a>
                         </td>
                  </tr>
             {% endfor %}

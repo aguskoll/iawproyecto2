@@ -166,14 +166,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'editarJugadores')), array (  '_controller' => 'AppBundle\\Controller\\EditorController::editarJugadoresAction',));
             }
 
-        }
+            // asignarEstadisticas
+            if (0 === strpos($pathinfo, '/editor/asignarEstadisticas') && preg_match('#^/editor/asignarEstadisticas/(?P<idJugador>[^/]++)/(?P<idPartido>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'asignarEstadisticas')), array (  '_controller' => 'AppBundle\\Controller\\EditorController::asignarEstadisticasJugadoresAction',));
+            }
 
-        // asignarEstadisticas
-        if (0 === strpos($pathinfo, '/admin/asignarEstadisticas') && preg_match('#^/admin/asignarEstadisticas/(?P<idJugador>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'asignarEstadisticas')), array (  '_controller' => 'AppBundle\\Controller\\EditorController::asignarEstadisticasJugadores',));
-        }
-
-        if (0 === strpos($pathinfo, '/editor')) {
             // cargarResultados
             if ($pathinfo === '/editor/cargarResultados') {
                 return array (  '_controller' => 'AppBundle\\Controller\\EditorController::cargarResultadosAction',  '_route' => 'cargarResultados',);

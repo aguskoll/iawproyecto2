@@ -11,15 +11,17 @@
             {% for j in jugadoresEquipo1%}
                
                  <tr>
-                     <td>    Nombre: {{ j.getNombre() }}  </td>
-                      <td>
-                       <form action="{{path('asignarEstadisticas', {'idPartido': p.getId()}}" method="POST">
-                               
-                        <input type="submit" class="btn btn-primary pull-right" value="guardar" />
-                        
-                         {#{ <a id='r_{{j.getId()}}' href='{{ path('asignarEstadisticas', {'idPartido': p.getId()}}' >
-                              Guardar estadistica</a>}#}
-                        </td>
+                     <td>   
+                         Nombre: {{ j.getNombre() }}  
+                     </td>
+                     <td> 
+                         <a href="{{path('asignarEstadisticas',{'idJugador':j.getId(),'idPartido': partido.getId() }) }}" class=" btn btn-sm btn-primary" > 
+                             {{'Asignar estadisticas del partido'|trans}}
+                          </a>  
+                      </td> 
+                     <td>
+                      
+                      </td>
                  </tr>
             {% endfor %}
         </ul>

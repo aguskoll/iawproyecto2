@@ -9,6 +9,7 @@ use AppBundle\Entity\Equipo;
 
 class EditorController extends Controller
 {
+   
     /**
      * @Route("/editor", name="editorPage")
      */
@@ -33,21 +34,28 @@ class EditorController extends Controller
          $jugadoresEquipo1=$equipo1->getJugadores();
          $jugadoresEquipo2=$equipo2->getJugadores();
        
-         
+       
          return $this->render('vistasEditor/verJugadores.html.twig', 
                  array('jugadoresEquipo1' => $jugadoresEquipo1,'jugadoresEquipo2' => $jugadoresEquipo2,
-                     'equipo1'=>$equipo1,'equipo2'=>$equipo2));
+                     'equipo1'=>$equipo1,'equipo2'=>$equipo2,'partido'=>$partido));
       
     }
     
     /**
-     * @Route("/admin/asignarEstadisticas/{idJugador}", name="asignarEstadisticas")
+     * @Route("/editor/asignarEstadisticas/{idJugador}/{idPartido}", name="asignarEstadisticas")
      */
-    public function asignarEstadisticasJugadores($idJugador){
+    public function asignarEstadisticasJugadoresAction($idJugador,$idPartido, Request $request){
          $em=$this->getDoctrine()->getManager();
          $jugador = $em->getRepository('AppBundle:Jugador')
                 ->find($idJugador);
         
+         if(!$jugador){
+         
+         throw $this->createNotFoundException('Error al editar jugador');
+     }
+      //   echo '<html><body>usuario nombre:'.$jugador->getNombre().'</body></html>';  
+        
+         
          $form=$this->createFormBuilder($jugador)
             ->add('puntos', 'integer')
             ->add('asistencias', 'integer')
@@ -57,13 +65,30 @@ class EditorController extends Controller
       
        $form->handleRequest($request); 
        //TODO ACTUALIZAR LAS ESTADISTICAS SUMANDO LO ANTERIRO
-        if ($form->isValid()&&$form->isSubmitted()) { 
+        if ( $form->isValid()&& $form->isSubmitted()) { 
             $this->addFlash('mensaje', 'La estadistica se guardo correctamente');
+         
+            $puntos=$form->get('puntos')->getData();
+            $defensas=$form->get('defensas')->getData();
+            $asistencias=$form->get('asistencias')->getData();
+            
+            $jugador->setPuntos($jugador->getPuntos()+$puntos);
+            $jugador->setAsistencias($jugador->getAsistencias()+$defensas);
+            $jugador->setDefensas($jugador->getDefensas()+$asistencias);
+            
+           // $em->persist($jugador);
+       
+       
             $em->flush(); 
+          //  $response = $this->redirectToRoute('editarJugadores', array('idPartido'  => $idPartido));
             return $this->redirectToRoute('cargarResultados'); 
+         //return $response;
         } 
-        return $this->redirectToRoute('editarJugadores');
+    
+   return  $this->render('forms/estadisticasJugadorForm.html.twig', array('jugador' => $jugador, 'form' => $form->createView(),'idPartido'  => $idPartido));
+      
     }
+    //que diferencia hay entre un render y un redirectToRoute?
     
      /**
       * cargarResultadosAction: muestra todos los partidos que el editor puede cargar resultados
