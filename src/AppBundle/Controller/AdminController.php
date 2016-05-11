@@ -8,6 +8,7 @@ use AppBundle\Entity\Equipo;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use AppBundle\Form\TeamFormType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use AppBundle\Entity\Partido;
 
 class AdminController extends Controller
 {
@@ -16,12 +17,12 @@ class AdminController extends Controller
      */
     public function adminAction(Request $request)
     {
+        $em=$this->getDoctrine()->getManager();
+        $partidos = $em->getRepository('AppBundle:Partido')
+                ->findAll();
+        $tamaño=sizeof($partidos);
         // replace this example code with whatever you need
-        return $this->render('default/admin.html.twig');
-        /*array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        ));
-        */
+        return $this->render('default/admin.html.twig',array('fixture'=>$tamaño));
     }
 
     /**
@@ -100,60 +101,29 @@ class AdminController extends Controller
         return $this->redirectToRoute('asignarEditor');
          }
 
-    // private function crearFixture{
-    //     // If odd number of teams add a "ghost".
-    // $ghost = false;
-    // if ($teams % 2 == 1) {
-    //     $teams++;
-    //     $ghost = true;
-    // }
-    
-    // // Generate the fixtures using the cyclic algorithm.
-    // $totalRounds = $teams - 1;
-    // $matchesPerRound = $teams / 2;
-    // $rounds = array();
-    // for ($i = 0; $i < $totalRounds; $i++) {
-    //     $rounds[$i] = array();
-    // }
-   
-    // for ($round = 0; $round < $totalRounds; $round++) {
-    //     for ($match = 0; $match < $matchesPerRound; $match++) {
-    //         $home = ($round + $match) % ($teams - 1);
-    //         $away = ($teams - 1 - $match + $round) % ($teams - 1);
-    //         // Last team stays in the same place while the others
-    //         // rotate around it.
-    //         if ($match == 0) {
-    //             $away = $teams - 1;
-    //         }
-    //         $rounds[$round][$match] = team_name($home + 1, $names) 
-    //             . " v " . team_name($away + 1, $names);
-    //     }
-    // }
-
-    // // Interleave so that home and away games are fairly evenly dispersed.
-    // $interleaved = array();
-    // for ($i = 0; $i < $totalRounds; $i++) {
-    //     $interleaved[$i] = array();
-    // }
-    
-    // $evn = 0;
-    // $odd = ($teams / 2);
-    // for ($i = 0; $i < sizeof($rounds); $i++) {
-    //     if ($i % 2 == 0) {
-    //         $interleaved[$i] = $rounds[$evn++];
-    //     } else {
-    //         $interleaved[$i] = $rounds[$odd++];
-    //     }
-    // }
-
-    // $rounds = $interleaved;
-
-    // // Last team can't be away for every game so flip them
-    // // to home on odd rounds.
-    // for ($round = 0; $round < sizeof($rounds); $round++) {
-    //     if ($round % 2 == 1) {
-    //         $rounds[$round][0] = flip($rounds[$round][0]);
-    //     }
-    // }
-    // }
+     /**
+      *@Route("/admin/crearFixture", name="crearFixture")
+      */
+     public function crearFixture(Request $request){
+        $em=$this->getDoctrine()->getManager();
+        $equipos = $em->getRepository('AppBundle:Equipo')
+                ->findAll();
+        $tamaño=sizeof($equipos);
+        $partido;
+        for ($i = 0; $i < $tamaño - 1; $i++) {
+            for ($j = $i + 1; $j < $tamaño; $j++) {
+                $partido=new Partido();
+                $partido->setEquipo1($equipos[$i]);
+                $partido->setEquipo2($equipos[$j]);
+                $partido->setTermino(0);
+                $em->persist($partido);
+                $em->flush();
+             }
+        }
+        $request->getSession()
+                    ->getFlashBag()
+                    ->add('success', 'Fixture creado')
+                ;
+        return $this->redirectToRoute('adminPage');
+     }
 }

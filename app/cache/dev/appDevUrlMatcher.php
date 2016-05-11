@@ -126,6 +126,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'vincularEditor')), array (  '_controller' => 'AppBundle\\Controller\\AdminController::vincularEditorAction',));
             }
 
+            // crearFixture
+            if ($pathinfo === '/admin/crearFixture') {
+                return array (  '_controller' => 'AppBundle\\Controller\\AdminController::crearFixture',  '_route' => 'crearFixture',);
+            }
+
         }
 
         // homepage

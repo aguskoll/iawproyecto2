@@ -2,6 +2,9 @@
 
 {% block body %}
 ADMIN PLACE<br>
+{% if fixture <=0 %}
+<li class="active link "><a href="{{path('crearFixture')}}">Crear Fixture</a></li>
+{% endif %}
 {% endblock %}
 
 {% block form %}
