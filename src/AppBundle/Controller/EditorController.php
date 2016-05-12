@@ -140,6 +140,10 @@ class EditorController extends Controller
  
         if ($form->isValid()&&$form->isSubmitted()) { 
             $this->addFlash('mensaje', 'El resultado se guardo correctamente');
+           
+         $this-> setearEstadisticas($partido);
+           
+            
             $em->flush(); 
             return $this->redirectToRoute('cargarResultados'); 
         } 
@@ -147,5 +151,33 @@ class EditorController extends Controller
    return  $this->render('vistasEditor/editarResultado.html.twig', array('partidos' => $partido, 'form' => $form->createView()));
     }
     
-    
+    /**
+        funcion privada para setear las estadisticas de un partido
+     *      */
+     function setearEstadisticas($partido){
+        
+            $partido->setTermino(true);
+            $pe1=$partido->getPuntosEquipo1();
+            $pe2=$partido->getPuntosEquipo2();
+           
+            $equipo1= $partido->getEquipo1();
+            $equipo2= $partido->getEquipo2();
+           
+            $equipo1->setGoles($equipo1->getGoles()+$pe1);
+             $equipo2->setGoles($equipo2->getGoles()+$pe2);
+           
+            if($pe1>$pe2)
+            {
+                $equipo1->setPartidosGanados( $equipo1->getPartidosGanados()+1);
+                
+            }
+            else {
+                  $equipo2->setPartidosGanados( $equipo2->getPartidosGanados()+1);
+                
+            }
+            
+            $equipo1->setPartidosJugados($equipo1->getPartidosJugados()+1);
+            $equipo2->setPartidosJugados($equipo2->getPartidosJugados()+1);
+            
+    }
 }

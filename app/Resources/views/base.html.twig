@@ -46,7 +46,8 @@
               <li class="active link "><a href="{{path('mostrarTodos')}}">Partidos</a></li>
               <li class="active link "><a href="{{path('mostrarEquipos')}}">Equipos Participantes</a></li>
               <li class="active link "><a href="{{path('mostrarJugadores')}}">Jugadores</a></li>
-            
+              <li class="active link "><a href="{{path('tablaPosiciones')}}">Tabla</a></li>
+              
               {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
               <li><a class="link " href="{{ path('logout') }}">Logout</a></li>
               <li><a class="link " href="{{ path('createTeam') }}">CrearEquipo</a></li>

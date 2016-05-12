@@ -160,6 +160,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        // tablaPosiciones
+        if ($pathinfo === '/tablaPosiciones') {
+            return array (  '_controller' => 'AppBundle\\Controller\\DefaultUserController::tablaPosicionesAction',  '_route' => 'tablaPosiciones',);
+        }
+
         if (0 === strpos($pathinfo, '/editor')) {
             // editorPage
             if ($pathinfo === '/editor') {

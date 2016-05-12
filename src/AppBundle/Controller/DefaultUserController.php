@@ -16,6 +16,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Doctrine\ORM\EntityRepository;
 
 class DefaultUserController extends Controller {
     /**
@@ -104,7 +105,22 @@ class DefaultUserController extends Controller {
         }
 //debug:
       //   echo '<html><body>cant jug'.count($jugadores).'</body></html>';
-        return
-                $this->render('defaultUser/jugadores.html.twig', array('jugadores' => $jugadores));
+        return $this->render('defaultUser/jugadores.html.twig', array('jugadores' => $jugadores));
     }
+    
+    /**
+     * Muestrala tabla de posiciones del torneo 
+     * @Route("/tablaPosiciones", name="tablaPosiciones")
+     */
+    public function tablaPosicionesAction() {
+    
+         $equipos = $this->getDoctrine()
+                ->getRepository('AppBundle:Equipo')
+                ->findBy(array(), array('partidosGanados' => 'ASC'));
+          
+        
+
+         return $this->render('defaultUser/tablaPosiciones.html.twig', array('equipos' => $equipos));
+    }
+    
 }

@@ -43,17 +43,22 @@ class Equipo {
    /**
    * @ORM\ManyToMany(targetEntity="Partido", mappedBy="equipos")
    **/
-     private $partidos;
-     
-   function getPartidos() {
-        return $this->partidos;
-    }
-
-    function setPartidos($partidos) {
-        $this->partidos = $partidos;
-    }
-
-    
+  private $partidos;
+  
+    /**
+     * @ORM\Column(type="integer")
+     */
+   private $partidosJugados=0;
+   
+   /**
+     * @ORM\Column(type="integer")
+     */
+   private $partidosGanados=0;
+   
+   /**
+     * @ORM\Column(type="integer")
+     */
+   private $goles=0;
     /**
      * @ORM\Column(type="string", length=100)
      */
@@ -63,6 +68,41 @@ class Equipo {
      * @ORM\OneToMany(targetEntity="Jugador", mappedBy="equipo")
      */
     protected $jugadores;
+   
+    
+  function getPartidosJugados() {
+      return $this->partidosJugados;
+  }
+
+  function getPartidosGanados() {
+      return $this->partidosGanados;
+  }
+
+  function getGoles() {
+      return $this->goles;
+  }
+
+  function setPartidosJugados($partidosJugados) {
+      $this->partidosJugados = $partidosJugados;
+  }
+
+  function setPartidosGanados($partidosGanados) {
+      $this->partidosGanados = $partidosGanados;
+  }
+
+  function setGoles($goles) {
+      $this->goles = $goles;
+  }
+ 
+   function getPartidos() {
+        return $this->partidos;
+    }
+
+    function setPartidos($partidos) {
+        $this->partidos = $partidos;
+    }
+
+    
    
     /**
      * @ORM\Column(type="string", nullable=true)

@@ -1,0 +1,34 @@
+{# empty Twig template #}
+{% block body %}
+    <h1>Tabla de posiciones:</h1>
+   
+    <table border="1" >
+        <tr>
+            <td><strong>Equipo</strong></td>
+            <td><strong>Partidos ganados</strong></td>
+            <td><strong>Partidos jugados</strong></td>
+            <td><strong>Goles convertidos</strong></td>
+          </tr>
+        <ul id="navigation">
+           
+            {% for e in equipos%}
+               
+                 <tr>
+                     <td>   
+                        {{ e.getNombre() }}  
+                     </td>
+                     <td> 
+                        {{e.getPartidosGanados()}}
+                      </td> 
+                     <td>
+                         {{e.getPartidosJugados()}}
+                      </td>
+                      <td>
+                         {{e.getGoles()}}
+                      </td>
+                 </tr>
+            {% endfor %}
+        </ul>
+ </table>
+        
+{%endblock%}
