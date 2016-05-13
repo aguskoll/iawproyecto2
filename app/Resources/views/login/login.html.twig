@@ -1,23 +1,50 @@
 {% extends 'base.html.twig' %}
 
+{% block estilos %}
+    {{ parent() }}
+    <link href="{{ asset('css/login-style.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block body %}
-<section class="login">
-    <article>
+<section id="login" class="container content-section text-center">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h2>Iniciar sesión</h2>
+            {% if error %}
+                <div class="error">{{ error.message|trans }}</div>
+            {% endif %}
+            <div class="im-centered row">
+              <form action="{{ path('loginCheck') }} "method="post">
+                <input type="text" id="username" name="_username" placeholder="User/Mail" value="{{ last_username }}" required="required" class="input-txt"/>
 
-        {% if error %}
-            <div class="error">{{ error.message }}</div>
-        {% endif %}
+                <input type="password" id="password" name="_password" placeholder="Password" required="required" class="input-txt"/>
 
-        <form action="{{ path('loginCheck') }}" method="post">
-            <label for="username">User o Mail:</label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                    <button type="submit" class="btn-default btn-lg movido">Send </button>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="_password" />
-
-            <button type="submit">login</button>
-        </form>
-
-    </article>
+                  </div>
+              </form>
+        </div>
+    </div>
 </section>
+
+<!--<section id="about" class="container content-section text-center">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h2>Partidos: </h2>
+            {% if error %}
+                <div class="error">{{ error.message }}</div>
+            {% endif %}
+
+            <form action="{{ path('loginCheck') }}" method="post">
+                <label for="username">User o Mail:</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="_password" />
+
+                <button type="submit">login</button>
+            </form>
+        </div>
+    </div>
+</section>-->
+
 {% endblock %}

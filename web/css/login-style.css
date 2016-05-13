@@ -1,0 +1,38 @@
+.input-txt {
+  width: 100%;
+  padding: 20px 10px;
+  background: #000;
+  border: none;
+  font-size: 1em;
+  color: white;
+  border-bottom: 2px solid rgba(29, 155, 108, 0.4);
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-transition: background-color 0.5s ease-in-out;
+  -o-transition: background-color 0.5s ease-in-out;
+  -webkit-transition: background-color 0.5s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
+}
+.input-txt:-moz-placeholder {
+  color: #1d9b6c;
+}
+.input-txt:-ms-input-placeholder {
+  color: #1d9b6c;
+}
+.input-txt::-webkit-input-placeholder {
+  color: #1d9b6c;
+}
+.input-txt:focus {
+  background-color: #121212;
+  outline: none;
+  box-shadow:none;
+}
+
+.movido{
+  margin-top: 10px;
+  color: #fff;
+}
+.im-centered {
+  margin: auto; max-width: 300px;
+}
