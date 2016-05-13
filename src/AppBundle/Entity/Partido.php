@@ -36,7 +36,7 @@ class Partido {
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $comentario="vacio";
+    private $comentario="";
 
  
     /**

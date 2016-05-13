@@ -17,6 +17,7 @@
                          <th>Puntos  Equipo A</th>
                          <th>Puntos  Equipo B</th>
                          <th> Ganador </th>
+                         <th> Fecha </th>
                      </tr>    
                  </thead>    
         <!--ul id="navigation"-->
@@ -47,7 +48,7 @@
                                <td> - </td>
                                <td> - </td> 
                              {% endif %}
-                    
+                    <td> {{p.getHorario()|date('d-m-y') }}</td>
                  </tr>
             {% endfor %}
         <!--/ul-->

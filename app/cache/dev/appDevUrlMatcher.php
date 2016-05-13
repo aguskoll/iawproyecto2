@@ -168,6 +168,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultUserController::tablaPosicionesAction',  '_route' => 'tablaPosiciones',);
         }
 
+        // jugadoresPorEquipo
+        if (0 === strpos($pathinfo, '/jugadores') && preg_match('#^/jugadores/(?P<idEquipo>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'jugadoresPorEquipo')), array (  '_controller' => 'AppBundle\\Controller\\DefaultUserController::obtenerJugadoresPorEquipoAction',));
+        }
+
         if (0 === strpos($pathinfo, '/editor')) {
             // editorPage
             if ($pathinfo === '/editor') {

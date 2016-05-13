@@ -22,6 +22,11 @@
 					        {{ form_widget(form.puntosEquipo2, {'attr': {'class': 'form-control', 'placeholder' : 'puntos del equipo 2'}}) }}
 					        <span class="text-danger">{{ form_errors(form.puntosEquipo2) }}</span>
 					    </div>
+                                             <div class="form-group">
+                                              {{'Comentario del partido'}}
+                                              {{ form_widget(form.comentario, {'attr': {'class': 'form-control', 'placeholder' : 'comentario del partido'}}) }}
+                                               <span class="text-danger">{{ form_errors(form.comentario) }}</span>
+                                             </div>
                         </fieldset>
 
 				    <p>

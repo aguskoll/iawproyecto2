@@ -12,6 +12,7 @@
                                 <th>   Nombre del Equipo </th>
                                 <th>   Origen</th>
                                 <th>   Logo</th>
+                                 <th>  </th>
                             </tr>    
                         </thead>    
     
@@ -25,10 +26,16 @@
                                   {% if e.logo is not null and e.logo is not empty %}
                                    <td>
                                       <a href="{{ asset('uploads/logos/' ~ e.logo) }}">View logo</a>
-                                         {% endif %}
+                                        
                                    </td>
                                    {% else %}
                                    <td>-</td>
+                                    {% endif %}
+                                  <td>
+                                       <a href="{{path('jugadoresPorEquipo',{'idEquipo': e.getId() }) }}" class=" btn btn-sm btn-primary" > 
+                                                {{'Jugadores del equipo'|trans}}
+                                       </a>  
+                                  </td>   
                              </tr>
                       {% endfor %}
                         </tbody>

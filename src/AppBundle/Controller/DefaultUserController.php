@@ -96,13 +96,10 @@ class DefaultUserController extends Controller {
     public function mostrarJugadoresAction() {
         $jugadores= $this->getDoctrine()
                 ->getRepository('AppBundle:Jugador')
-                ->findAll();
+                ->findBy(array(), array('puntos' => 'DESC'));
 
-        if (!$jugadores) {
-            throw $this->createNotFoundException(
-                    'No hay partidos '
-            );
-        }
+      
+        
 //debug:
       //   echo '<html><body>cant jug'.count($jugadores).'</body></html>';
         return $this->render('defaultUser/jugadores.html.twig', array('jugadores' => $jugadores));
@@ -116,11 +113,29 @@ class DefaultUserController extends Controller {
     
          $equipos = $this->getDoctrine()
                 ->getRepository('AppBundle:Equipo')
-                ->findBy(array(), array('partidosGanados' => 'ASC'));
+                ->findBy(array(), array('partidosGanados' => 'DESC'));
           
         
 
          return $this->render('defaultUser/tablaPosiciones.html.twig', array('equipos' => $equipos));
     }
-    
+  
+    /**
+     * Muestrala tabla de jugadores correspondientes a un equipo
+     * @Route("/jugadores/{idEquipo}", name="jugadoresPorEquipo")
+     */
+    public  function obtenerJugadoresPorEquipoAction($idEquipo){
+       
+        $jugadores= $this->getDoctrine()
+                ->getRepository('AppBundle:Jugador')
+                ->findByEquipo($idEquipo);
+
+        if (!$jugadores) {
+            throw $this->createNotFoundException(
+                    'No hay partidos '
+            );
+        }
+
+        return $this->render('defaultUser/jugadores.html.twig', array('jugadores' => $jugadores));
+   }
 }

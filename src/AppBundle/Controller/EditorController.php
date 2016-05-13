@@ -55,8 +55,8 @@ class EditorController extends Controller
      }
       //   echo '<html><body>usuario nombre:'.$jugador->getNombre().'</body></html>';  
         
-         
-         $form=$this->createFormBuilder($jugador)
+         $default = array('message' => 'Type your message here');;
+         $form=$this->createFormBuilder( $default)
             ->add('puntos', 'integer')
             ->add('asistencias', 'integer')
             ->add('defensas', 'integer')
@@ -135,6 +135,7 @@ class EditorController extends Controller
      $form=$this->createFormBuilder($partido)
             ->add('puntosEquipo1', 'integer')
             ->add('puntosEquipo2', 'integer')
+             ->add('comentario', 'text')
             ->add('guardar', 'submit')
             ->getForm();
       
@@ -143,7 +144,7 @@ class EditorController extends Controller
         if ($form->isValid()&&$form->isSubmitted()) { 
             $this->addFlash('mensaje', 'El resultado se guardo correctamente');
            
-         $this-> setearEstadisticas($partido);
+             $this-> setearEstadisticas($partido);
            
             
             $em->flush(); 
@@ -182,4 +183,6 @@ class EditorController extends Controller
             $equipo2->setPartidosJugados($equipo2->getPartidosJugados()+1);
             
     }
+    
+   
 }
