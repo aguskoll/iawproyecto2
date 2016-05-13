@@ -1,44 +1,84 @@
-{# empty Twig template #}
-{% extends 'default/editor.html.twig' %}
+
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Jugadores:</h1>
-    <h4>Equipo: {{equipo1.getNombre()}}</h4>
-    <table border="1" >
-        
-        <ul id="navigation">
+   <section class="container content-section ">
+     <div class="row">   
+          <div class="col-lg-8 col-lg-offset-2"> 
            
-            {% for j in jugadoresEquipo1%}
-               
-                 <tr>
-                     <td>   
-                         Nombre: {{ j.getNombre() }}  
-                     </td>
-                     <td> 
-                         <a href="{{path('asignarEstadisticas',{'idJugador':j.getId(),'idPartido': partido.getId() }) }}" class=" btn btn-sm btn-primary" > 
-                             {{'Asignar estadisticas del partido'|trans}}
-                          </a>  
-                      </td> 
-                     <td>
-                      
+             <h2>Jugadores:</h2>
+             <table border="0">  
+                 <td>    
+                            <h4>{{equipo1.getNombre()}}</h4>
+                               <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>  Nombre </th>
+                                                         <th>    </th>
+                                                       
+                                                    </tr>    
+                                                </thead>    
+                                  
+                                         <tbody> 
+                                       {% for j in jugadoresEquipo1%}
+
+                                            <tr>
+                                                <td>   
+                                                {{ j.getNombre() }}  
+                                                </td>
+                                                <td> 
+                                                    <a href="{{path('asignarEstadisticas',{'idJugador':j.getId(),'idPartido': partido.getId() }) }}" class=" btn btn-sm btn-primary" > 
+                                                        {{'Asignar estadisticas del partido'|trans}}
+                                                     </a>  
+                                                 </td> 
+                                               
+                                            </tr>
+                                       {% endfor %}
+                                 </tbody>
+                            </table>
+                             </div>
+                                <h4> {{equipo2.getNombre()}}</h4>
+                                    <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>  Nombre </th>
+                                                         <th>    </th>
+                                                       
+                                                    </tr>    
+                                                </thead>    
+
+                                          <tbody> 
+
+                                            {% for j in jugadoresEquipo2%}
+
+                                                 <tr>
+                                                     <td>    {{ j.getNombre() }}  </td>
+<td>                                               <td>
+                                                    <a href="{{path('asignarEstadisticas',{'idJugador':j.getId(),'idPartido': partido.getId() }) }}" class=" btn btn-sm btn-primary" > 
+                                                        {{'Asignar estadisticas del partido'|trans}}
+                                                     </a>  
+                                                 </td> 
+                                                 </tr>
+                                                 
+                                            {% endfor %}
+                                             </tbody> 
+                                  
+
+                                              </table>
+                                             </div>
                       </td>
-                 </tr>
-            {% endfor %}
-        </ul>
- </table>
-<h4>Equipo: {{equipo2.getNombre()}}</h4>
-    <table border="1" >
-        
-        <ul id="navigation">
-           
-            {% for j in jugadoresEquipo2%}
-               
-                 <tr>
-                     <td>    Nombre: {{ j.getNombre() }}  </td>
-                     
-                 </tr>
-            {% endfor %}
-        </ul>
- </table>
+                      
+                      <td>
+                      <!--aca iria la columna para editar jugador -->
+                      {% block formularioJugador %}
+                          FORMULARio
+                      {% endblock %}
+                      </td>
+                    </table>
+                     </div>
+		</div>
+	</section>
 {% endblock %}
 

@@ -9,7 +9,7 @@
         <meta name="author" content="">
         <link rel="icon" href="../../favicon.ico">
 
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Bienvenido!{% endblock %}</title>
 
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet"
@@ -19,18 +19,17 @@
                  href="{{ asset('assets/vendor/bootstrap/dist/css/starter-template.css') }}">}#}
         <!-- Bootstrap Core CSS -->
 
-
+    {% block estilos %} 
         <!-- Custom CSS -->
         <link href="{{asset('css/grayscale.css')}}" rel="stylesheet">
 
-    {% block estilos %}{% endblock %}
+   {% endblock %}
     <!-- Custom Fonts para grey scale -->
+   {% block fonts %}
     <link href="{{asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-
-
-{% block fonts %}{% endblock %}
+    {% endblock %}
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -53,36 +52,37 @@
                     </a>
                 </div>
                 <!-- Links y acciones -->
-                <div class="collapse navbar-collapse navbar-right navbar-main-collapse"">
+                <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
 
-                    {% block navList %}
+                  
                         <ul class="nav navbar-nav">
                             <!-- li que se esconde cuando scrolleas -->
                             <li class="hidden">
                                 <a href="#page-top"></a>
                             </li>
+                            {% block navList %}
                             <li>
-                                <a class="page-scroll"  href="{{path('mostrarTodos')}}">Partidos</a>
-                            </li>
-                            <li >
-                                <a class="page-scroll"  href="{{path('mostrarEquipos')}}">Equipos Participantes</a>
+                                <a class="page-scroll"  href="{{path('mostrarTodos')}}">Fixture
+                                <i class="glyphicon glyphicon-calendar"></i>  
+                                </a>
                             </li>
                             <li>
-                                <a class="page-scroll"  href="{{path('mostrarJugadores')}}">Jugadores</a>
+                                <a class="page-scroll"  href="{{path('mostrarEquipos')}}">Equipos Participantes
+                                <i class=" glyphicon glyphicon-globe"></i> 
+                                </a>
                             </li>
-                            <li >
-                                <a  class="page-scroll" href="{{path('tablaPosiciones')}}">Tabla</a>
+                            <li>
+                                <a class="page-scroll"  href="{{path('mostrarJugadores')}}">Jugadores
+                                <i class="glyphicon glyphicon-user"></i> 
+                                </a>
+                            </li>
+                            <li>
+                                <a  class="page-scroll" href="{{path('tablaPosiciones')}}">Posiciones
+                                     <i class="glyphicon glyphicon-list"></i> 
+                                 </a>
                             </li>
 
-                            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                <li>
-                                    <a   class=" page-scroll" href="{{ path('logout') }}">Logout</a>
-                                </li>
-                            {% else %}
-                                <li>
-                                    <a class=" page-scroll" href="{{ path('loginForm') }}">Login</a>
-                                </li>
-                            {% endif %}
+                            
                             {% if is_granted('ROLE_ADMIN') %}
                                 <li>
                                     <a   class=" page-scroll" href="{{ path('adminPage') }}">
@@ -92,9 +92,24 @@
                             {% endif %}
 
                             {% if is_granted('ROLE_EDITOR') %}
+                                <li class="active link ">
+                                    <a href="{{path('cargarResultados')}}">Cargar resultados
+                                     <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </li>
+                               
+                            {% endif %}
+                            
+                            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                 <li>
-                                    <a class=" page-scroll" href="{{ path('editorPage') }}">
-                                        <i class="fa fa-lock"></i> {{ 'Menu editor'|trans }}
+                                    <a   class=" page-scroll" href="{{ path('logout') }}">Logout
+                                  <i class="glyphicon glyphicon-log-out"></i>  
+                                    </a>
+                               </li>
+                            {% else %}
+                                <li>
+                                    <a class=" page-scroll" href="{{ path('loginForm') }}">Login
+                                         <i class=" glyphicon glyphicon-log-in"></i>   
                                     </a>
                                 </li>
                             {% endif %}

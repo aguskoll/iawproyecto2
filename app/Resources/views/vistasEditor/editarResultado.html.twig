@@ -1,10 +1,10 @@
-{# empty Twig template #}
-{% extends 'default/editor.html.twig' %}
+
+{% extends 'base.html.twig' %}
 {% block body %}
   
-    <div class="main container">
-		<div class="row well">
-			<div class="col-md-6">
+  <section id="about" class="container content-section text-center">
+     <div class="row">   
+          <div class="col-lg-8 col-lg-offset-2">
 				<div class="page-header">
 					<h2>{% trans %}Cargar Resultado{% endtrans %}</h2>
 				</div>
@@ -31,5 +31,5 @@
 				{{ form_end(form) }}
 			</div>
 		</div>
-	</div>
+	</section>
 {% endblock %}

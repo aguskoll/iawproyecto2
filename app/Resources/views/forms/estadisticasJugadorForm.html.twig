@@ -1,37 +1,41 @@
-{# empty Twig template #}
-{% extends 'vistasEditor/verJugadores.html.twig' %}
-{%block body %}
-{# <form action="{{path('asignarEstadisticas', {'idJugador': jugador.getId(),'idPartido': idPartido} )}}" method="POST">#}
-  <div class="main container">
-		<div class="row well">
-			<div class="col-md-6">
-				<div class="page-header">
-					<h2>{% trans %}Cargar estadisticas del jugador{% endtrans %}</h2>
-				</div>
 
-<h4 class="text-danger">{{ form_errors(form) }}</h4>   
-<fieldset>  
-{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'role' : 'form'}}) }}
+{% extends 'vistasEditor/verJugadores.html.twig' %}
+
+{%block body %}
+   <section class="container content-section ">
+     <div class="row">   
+          <div class="col-lg-8 col-lg-offset-2"> 
+              
+                <div class="page-header  text-center">
+                    <h2>{% trans %}Cargar estadisticas de{% endtrans %}</h2>
+                    <h2>       {{ jugador.getNombre()  }} </h2>
+                </div>
+
+                <h4 class="text-danger">{{ form_errors(form) }}</h4>   
+                <fieldset>  
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'role' : 'form'}}) }}
                     <div class="form-group">
                         {{'Defensas'}}
                         {{ form_widget(form.defensas, {'attr': {'class': 'form-control', 'placeholder' : 'Defensas'}}) }}
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
                         {{'Puntos'}}
                         {{ form_widget(form.puntos, {'attr': {'class': 'form-control', 'placeholder' : 'Puntos'}}) }}
                     </div>
-                     <div class="form-group">
-                     {{'Asistencias'}}
-                    {{ form_widget(form.asistencias, {'attr': {'class': 'form-control', 'placeholder' : 'Asistencias'}}) }}
-                     </div>
+                    <div class="form-group">
+                        {{'Asistencias'}}
+                        {{ form_widget(form.asistencias, {'attr': {'class': 'form-control', 'placeholder' : 'Asistencias'}}) }}
+                    </div>
 
-       </fieldset>  
-       <p>
-	{{ form_widget(form.guardar, {'label' : 'Guardar resultado', 'attr': {'class': 'btn btn-success'}}) }}
-	 </p>
-
-    {{ form_end(form) }}
-    </div>
-		</div>
-	</div>
-  {% endblock %}
+                </fieldset>  
+                <div  class ="text-center">
+                    <p>
+                        {{ form_widget(form.guardar, {'label' : 'Guardar resultado', 'attr': {'class': 'btn btn-success'}}) }}
+                    </p>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </section>
+    
+{% endblock %}

@@ -1,24 +1,52 @@
-{# empty Twig template #}
-{% extends 'default/editor.html.twig' %}
+
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Partidos:</h1>
-
+    <section id="about" class="container content-section text-center">
+     <div class="row">   
+          <div class="col-lg-8 col-lg-offset-2">
+               <h2>Editar Partidos:</h2>
+                 <div class="table-responsive">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th>   Equipo A </th>
+                                 <th>   Puntos </th>
+                                <th>   Equipo B </th>
+                                <th>   Puntos </th>
+                            </tr>    
+                        </thead>    
     
-       
-    <table border="1" >
-        
-        <ul id="navigation">
-           
+                  <tbody> 
             {% for p in partidos %}
                
                  <tr>
-                     <td>    Equipo1: {{ p.getEquipo1().getNombre() }} Puntos: {{ p.getPuntosEquipo1()  }}</td>
-                      <td>    Equipo2: {{ p.getEquipo2().getNombre()  }}Puntos: {{ p.getPuntosEquipo2()  }}  </td>
+                     <td>   {{ p.getEquipo1().getNombre() }} </td>
+                     <td> 
+                         {% if p.termino() %}
+                             {{ p.getPuntosEquipo1()  }}  
+                         {% else %}
+                            -    
+                         {% endif %}
+                     </td>
+                      <td>   {{ p.getEquipo2().getNombre()  }}</td>
+                       <td> 
+                            {% if p.termino() %}
+                             {{ p.getPuntosEquipo2()  }}  
+                         {% else %}
+                            -   
+                         {% endif %}
+                       </td>
                       
                     
-                      <td>  <a href="{{path('updateResultados',{'idPartido': p.getId }) }}" class=" btn btn-sm btn-primary" > 
-                      {{'cargar resultado'|trans}}
+                      <td>  
+                           
+                          <a href="{{path('updateResultados',{'idPartido': p.getId }) }}" class=" btn btn-sm btn-primary" > 
+                             {% if p.termino() %}
+                                 {{'Editar resultado'|trans}}
+                              {% else %}
+                                    {{'cargar resultado'|trans}}
+                             {% endif %}
                       </a>  
                       </td>
                       
@@ -29,6 +57,10 @@
                       </td>
                  </tr>
             {% endfor %}
-        </ul>
- </table>
+                    </tbody>
+                        </table> 
+                       </div>  
+                  </div>    
+             </div>
+           </section>         
 {% endblock %}

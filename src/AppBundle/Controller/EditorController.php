@@ -85,8 +85,10 @@ class EditorController extends Controller
          //return $response;
         } 
     
-   return  $this->render('forms/estadisticasJugadorForm.html.twig', array('jugador' => $jugador, 'form' => $form->createView(),'idPartido'  => $idPartido));
-      
+   return  $this->render('forms/estadisticasJugadorForm.html.twig',
+           array( 
+               'jugador' => $jugador, 'form' => $form->createView(),'idPartido'  => $idPartido));
+     
     }
     //que diferencia hay entre un render y un redirectToRoute?
     
