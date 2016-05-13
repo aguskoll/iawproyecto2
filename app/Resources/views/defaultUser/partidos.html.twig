@@ -1,31 +1,60 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Partidos:</h1>
+   
 
     
-       
-    <table border="1" >
-        
-        <ul id="navigation">
-           
+  <section id="about" class="container content-section text-center">
+     <div class="row">   
+          <div class="col-lg-8 col-lg-offset-2">
+               <h2>Partidos:</h2>
+         <div class="table-responsive">
+             <table class="table ">
+                 <thead>
+                     <tr>
+                         <th>Equipo A</th>
+                         <th>Equipo B</th>
+                         <th>Puntos  Equipo A</th>
+                         <th>Puntos  Equipo B</th>
+                         <th> Ganador </th>
+                     </tr>    
+                 </thead>    
+        <!--ul id="navigation"-->
+          <tbody> 
             {% for p in partidos %}
                
                  <tr>
-                     <td>    Equipo1: {{ p.getEquipo1().getNombre() }}</td>
-                      <td>    Equipo2: {{ p.getEquipo2().getNombre()  }} </td>
+                     <td>    {{ p.getEquipo1().getNombre() }}
+                            {% if p.getEquipo1().getLogo() is not null and p.getEquipo1().getLogo() is not empty %}
+                                <a href="{{ asset('uploads/logos/' ~ e.logo) }}">View logo</a>
+                              {%endif%}  
+                     </td>
+                      <td>    {{ p.getEquipo2().getNombre()  }} 
+                              {% if p.getEquipo2().getLogo() is not null and p.getEquipo2().getLogo() is not empty %}
+                                <a href="{{ asset('uploads/logos/' ~ e.logo) }}">View logo</a>
+                              {%endif%}  
+                      </td>
                           {% if p.getTermino() %}
-                             <td> Puntos Equipo1: {{ p.getPuntosEquipo1()}}</td>
-                             <td> Puntos Equipo2: {{ p.getPuntosEquipo2()}}</td>
-                              {%if p.getPuntosEquipo1()> p.getPuntosEquipo2() %} 
-                                     <td>Ganador: Equipo 1 </td>
-                              {% else  %} 
-                                    <td>Ganador: Equipo 2 </td>
-                              {% endif %} 
-                           {% endif %}
+                             <td> {{ p.getPuntosEquipo1()}}</td>
+                             <td> {{ p.getPuntosEquipo2()}}</td>
+                                 {%if p.getPuntosEquipo1()> p.getPuntosEquipo2() %} 
+                                        <td >{{ p.getEquipo1().getNombre() }}</td>
+                                 {% else  %} 
+                                       <td>  {{ p.getEquipo2().getNombre() }}</td>
+                                 {% endif %} 
+                             {% else %} 
+                               <td> - </td>
+                               <td> - </td>
+                               <td> - </td> 
+                             {% endif %}
                     
                  </tr>
             {% endfor %}
-        </ul>
- </table>
+        <!--/ul-->
+         </tbody>
+       </table> 
+        </div>  
+   </div>    
+ </div>
+</section>          
 {% endblock %}

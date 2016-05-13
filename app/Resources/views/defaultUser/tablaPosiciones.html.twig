@@ -1,15 +1,21 @@
-{# empty Twig template #}
+{% extends 'base.html.twig' %}
 {% block body %}
-    <h1>Tabla de posiciones:</h1>
    
-    <table border="1" >
-        <tr>
-            <td><strong>Equipo</strong></td>
-            <td><strong>Partidos ganados</strong></td>
-            <td><strong>Partidos jugados</strong></td>
-            <td><strong>Goles convertidos</strong></td>
-          </tr>
-        <ul id="navigation">
+  <section id="about" class="container content-section text-center">
+     <div class="row">   
+          <div class="col-lg-8 col-lg-offset-2">    
+            <h2>Tabla de posiciones:</h2>
+            <div class="table-responsive">
+               <table class="table ">
+                        <thead>     
+                             <tr>
+                                <th><strong>Equipo</strong></th>
+                                <th><strong>Partidos ganados</strong></th>
+                                <th><strong>Partidos jugados</strong></th>
+                                <th><strong>Goles convertidos</strong></th>
+                              </tr>
+                             </thead>    
+                <tbody> 
            
             {% for e in equipos%}
                
@@ -28,7 +34,12 @@
                       </td>
                  </tr>
             {% endfor %}
-        </ul>
- </table>
+                    </tbody>
+                 </table> 
+              </div>  
+          </div>    
+    </div>
+</section>       
+            
         
 {%endblock%}

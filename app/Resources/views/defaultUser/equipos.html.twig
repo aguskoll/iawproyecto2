@@ -1,29 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Equipos participantes:</h1>
-
+    <section id="about" class="container content-section text-center">
+     <div class="row">   
+          <div class="col-lg-8 col-lg-offset-2">
+                 <h2>Equipos participantes:</h2>
+                    <div class="table-responsive">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th>   Nombre del Equipo </th>
+                                <th>   Origen</th>
+                                <th>   Logo</th>
+                            </tr>    
+                        </thead>    
     
-       
-    <table border="1" >
-        
-        <ul id="navigation">
-           
-            {% for e in equipos %}
-               
-                 <tr>
-                     <td>    Nombre: {{ e.getNombre() }}</td>
-                      <td>    Origen: {{ e.getOrigen()  }} </td>
-                       {% if e.logo is not null and e.logo is not empty %}
+                  <tbody> 
+                {% for e in equipos %}
 
-                      <td><a href="{{ asset('uploads/logos/' ~ e.logo) }}">View logo</a>
-                       {% endif %}
-                       </td>
+                             <tr>
+                                 <td>  {{ e.getNombre() }}</td>
+                                  <td>  {{ e.getOrigen()  }} </td>
 
-                           
-                    
-                 </tr>
-            {% endfor %}
-        </ul>
- </table>
+                                  {% if e.logo is not null and e.logo is not empty %}
+                                   <td>
+                                      <a href="{{ asset('uploads/logos/' ~ e.logo) }}">View logo</a>
+                                         {% endif %}
+                                   </td>
+                                   {% else %}
+                                   <td>-</td>
+                             </tr>
+                      {% endfor %}
+                        </tbody>
+                        </table> 
+                       </div>  
+                  </div>    
+             </div>
+           </section>         
+            
 {% endblock %}

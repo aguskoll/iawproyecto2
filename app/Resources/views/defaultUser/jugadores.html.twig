@@ -2,21 +2,42 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Jugadores participantes:</h1>
-         <table border="1" >
-        
-        <ul id="navigation">
-           
-            {% for j in jugadores %}
-               
-                 <tr>        <td> Nombre: {{j.getNombre()}}</td>
-                             <td> Equipo1: {{ j.getEquipo().getNombre() }}</td>
-                              <td> Equipo: {{ j.getEquipo().getNombre()}}</td> 
-                             <td> Puntos: {{ j.getPuntos()}}</td>
-                             <td> Asistencias: {{ j.getAsistencias()}}</td>
-                             <td> Defensas: {{ j.getDefensas()}}</td>
-                 </tr>
-            {% endfor %}
-        </ul>
- </table>
+    
+    
+    
+  
+   <section id="about" class="container content-section text-center">
+     <div class="row">   
+          <div class="col-lg-8 col-lg-offset-2">
+                <h2>Jugadores participantes:</h2>
+                    <div class="table-responsive">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Equipo</th>
+                                    <th>Puntos</th>
+                                    <th>Asistencias</th>
+                                    <th> Defensas </th>
+                                </tr>    
+                            </thead>    
+                         <tbody> 
+                            {% for j in jugadores %}
+
+                             <tr>     
+                                        <td>{{j.getNombre()}}</td>
+                                         <td> {{ j.getEquipo().getNombre()}}</td> 
+                                         <td> {{ j.getPuntos()}}</td>
+                                         <td> {{ j.getAsistencias()}}</td>
+                                         <td> {{ j.getDefensas()}}</td>
+                             </tr>
+                        {% endfor %}
+
+                     </tbody>
+                 </table> 
+              </div>  
+          </div>    
+    </div>
+</section>       
+            
 {% endblock %}
