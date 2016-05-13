@@ -53,14 +53,19 @@
                 </div>
                 <!-- Links y acciones -->
                 <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-
-                  
                         <ul class="nav navbar-nav">
                             <!-- li que se esconde cuando scrolleas -->
                             <li class="hidden">
                                 <a href="#page-top"></a>
                             </li>
                             {% block navList %}
+                            {% if app.request.get('_route') != 'homepage' %}
+                            <li>
+                                <a class="page-scroll"  href="{{path('homepage')}}">Home
+                                <i class="glyphicon glyphicon-home"></i>
+                                </a>
+                            </li>
+                            {% endif %}
                             <li>
                                 <a class="page-scroll"  href="{{path('mostrarTodos')}}">Fixture
                                 <i class="glyphicon glyphicon-calendar"></i>  
@@ -113,9 +118,8 @@
                                     </a>
                                 </li>
                             {% endif %}
+                        {% endblock %}
                         </ul>
-                    {% endblock %}
-
                 </div>
                 <!--/.nav-collapse -->
             </div>

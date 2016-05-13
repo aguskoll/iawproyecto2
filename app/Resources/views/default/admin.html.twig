@@ -1,12 +1,42 @@
 {% extends 'base.html.twig' %}
-
-{% block body %}
-ADMIN PLACE<br>
-{% if fixture <=0 %}
-<li class="active link "><a href="{{path('crearFixture')}}">Crear Fixture</a></li>
-{% endif %}
+{% block navList %}
+	<li>
+        <a class="page-scroll"  href="{{path('homepage')}}">Home
+        <i class="glyphicon glyphicon-home"></i>
+        </a>
+    </li>
+        <li>
+        <a   class=" page-scroll" href="{{ path('adminPage') }}">
+            <i class="fa fa-lock"></i> {{ 'Menu administrador'|trans }}
+        </a>
+    </li>
+    <li>
+        <a class="page-scroll"  href="{{path('crearFixture')}}">Crear Fixture
+        <i class=" glyphicon glyphicon-calendar"></i>
+        </a>
+    </li>
+    <li>
+        <a class="page-scroll"  href="{{path('editarPartidos')}}">Editar Partidos
+        <i class="glyphicon glyphicon-edit"></i>
+        </a>
+    </li>
+    <li>
+        <a  class="page-scroll" href="{{path('createTeam')}}">Crear equipo
+             <i class="glyphicon glyphicon-plus"></i>
+         </a>
+    </li>
+    <li>
+        <a   class=" page-scroll" href="{{ path('logout') }}">Logout
+      <i class="glyphicon glyphicon-log-out"></i>
+        </a>
+   </li>
 {% endblock %}
-
-{% block form %}
-<li class="active link "><a href="{{path('asignarEditores')}}">Asignar editores</a></li>
+{% block body %}
+<section id="admin" class="container content-section text-center">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2">
+               <h2>Welcole admin</h2>
+		</div>
+ 	</div>
+</section>
 {% endblock %}

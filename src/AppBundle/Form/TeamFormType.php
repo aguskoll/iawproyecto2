@@ -16,9 +16,15 @@ class TeamFormType extends AbstractType
 
 public function buildForm(FormBuilderInterface $builder, array $options){
     $builder
-        ->add('nombre', TextType::class)
-        ->add('origen', TextType::class,array('required' => false))
-        ->add('logo', FileType::class, array('label' => 'logo (imagen)'));
+        ->add('nombre', TextType::class, array('attr' => array('class'=>'input-txt',
+                                                                'placeholder'=>'Nombre'
+                                                                )))
+        ->add('origen', TextType::class,array('required' => false,
+            'attr' => array('class'=>'input-txt','placeholder'=>'Ciudad origen')))
+
+        ->add('logo', FileType::class, array('required' => false,'attr' => array('class'=>'file',
+                                                                'placeholder'=>'Escudo'
+                                                                )));
 }
 
 

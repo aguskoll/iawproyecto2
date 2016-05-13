@@ -39,17 +39,18 @@ class AdminController extends Controller
         $form->handleRequest($request);
         if ($form->isValid()) {
             $logo = $equipo->getLogo();
-            $data = $form->getData();
-            // Generate a unique name for the file before saving it
-            $logoName = md5(uniqid()).'.'.$logo->guessExtension();
+            if(! is_null($logo)){
+                // Generate a unique name for the file before saving it
+                $logoName = md5(uniqid()).'.'.$logo->guessExtension();
 
-            // Move the file to the directory where logos are stored
-            $logoDir = $this->container->getParameter('kernel.root_dir').'/../web/uploads/logos';
-            $logo->move($logoDir, $logoName);
+                // Move the file to the directory where logos are stored
+                $logoDir = $this->container->getParameter('kernel.root_dir').'/../web/uploads/logos';
+                $logo->move($logoDir, $logoName);
 
-            // Update the 'logo' property to store the PDF file name
-            // instead of its contents
-            $equipo->setLogo($logoName);
+                // Update the 'logo' property to store the PDF file name
+                // instead of its contents
+                $equipo->setLogo($logoName);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($equipo);
             $em->flush();

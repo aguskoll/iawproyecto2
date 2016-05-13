@@ -1,18 +1,35 @@
 {% extends '/default/admin.html.twig' %}
+{% block estilos %}
+    {{ parent() }}
+     <link href="{{ asset('css/login-style.css') }}" rel="stylesheet" />
+{% endblock %}
 
 {% block body %}
-
-<section class="main-block">
-    <article>
-        <section>
-            <h1>Register</h1>
-           <form action="{{ path('createTeam') }}" method="POST" novalidate="novalidate" enctype="multipart/form-data">
+<section id="team" class="container content-section text-center">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h2>Crear equipo</h2>
+            <div class="im-centered row">
+                <form action="{{ path('createTeam') }}" method="POST" enctype="multipart/form-data">
                 {{ form_errors(form) }}
-                {{ form_row(form.nombre) }}
-                {{ form_row(form.origen) }}
-                {{ form_row(form.logo) }}
-                 {{ form_rest(form) }}
-                <input type="submit" class="btn btn-primary pull-right" value="Registrar!" />
-            </form>
+                <div>
+                    {{ form_errors(form.nombre) }}
+                    {{ form_widget(form.nombre) }}
+                </div>
+                <div>
+                    {{ form_errors(form.origen)}}
+                    {{ form_widget(form.origen) }}
+                </div>
+                <div>
+                <br>
+                <label class="control-label">logo</label>
+                    {{ form_errors(form.logo)}}
+                    {{ form_widget(form.logo) }}
+                </div>
+                    {{ form_rest(form) }}
+                 <br>
+                <button type="submit" class="btn-default btn-lg movido">Create </button>
+           </form>
+        </div>
+    </div>
 </section>
 {% endblock %}
