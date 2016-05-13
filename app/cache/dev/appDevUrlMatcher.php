@@ -116,14 +116,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'AppBundle\\Controller\\AdminController::crearEquipo',  '_route' => 'createTeam',);
             }
 
-            // asignarEditor
-            if ($pathinfo === '/admin/asignarEditor') {
-                return array (  '_controller' => 'AppBundle\\Controller\\AdminController::mostrarPartidosEditores',  '_route' => 'asignarEditor',);
-            }
+            if (0 === strpos($pathinfo, '/admin/editarPartido')) {
+                // editarPartidos
+                if ($pathinfo === '/admin/editarPartidos') {
+                    return array (  '_controller' => 'AppBundle\\Controller\\AdminController::mostrarPartidosAction',  '_route' => 'editarPartidos',);
+                }
 
-            // vincularEditor
-            if (0 === strpos($pathinfo, '/admin/vincularEditor') && preg_match('#^/admin/vincularEditor/(?P<idPartido>[^/]++)/(?P<idEditor>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'vincularEditor')), array (  '_controller' => 'AppBundle\\Controller\\AdminController::vincularEditorAction',));
+                // editarPartido
+                if (preg_match('#^/admin/editarPartido/(?P<idPartido>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'editarPartido')), array (  '_controller' => 'AppBundle\\Controller\\AdminController::editarPartidoAction',));
+                }
+
             }
 
             // crearFixture

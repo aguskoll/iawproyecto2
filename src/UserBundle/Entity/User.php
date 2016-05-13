@@ -212,4 +212,8 @@ class User implements UserInterface, Serializable
             $this->password,
         ) = unserialize($serialized);
     }
+
+    public function __toString() {
+    return $this->username;
+}
 }

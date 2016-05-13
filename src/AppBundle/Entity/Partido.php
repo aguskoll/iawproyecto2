@@ -39,6 +39,11 @@ class Partido {
     private $comentario="vacio";
 
  
+    /**
+     * @ORM\Column(type="time",nullable=true)
+     */
+    private $horario;
+
       /**
    * @ORM\ManyToMany(targetEntity="Equipo", inversedBy="partidos")
    * @ORM\JoinTable(name="partidos_equipos")
@@ -116,6 +121,30 @@ class Partido {
        
     }
 */
+
+    /**
+     * Set horario
+     *
+     * @param \DateTime $horario
+     * @return Partido
+     */
+    public function setHorario($horario)
+    {
+        $this->horario = $horario;
+
+        return $this;
+    }
+
+    /**
+     * Get horario
+     *
+     * @return \DateTime 
+     */
+    public function getHorario()
+    {
+        return $this->horario;
+    }
+
     function getPuntosEquipo1() {
         return $this->puntosEquipo1;
     }

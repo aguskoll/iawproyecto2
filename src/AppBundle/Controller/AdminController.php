@@ -7,8 +7,10 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Equipo;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use AppBundle\Form\TeamFormType;
+use AppBundle\Form\MatchFormType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use AppBundle\Entity\Partido;
+use UserBundle\Entity\User;
 
 class AdminController extends Controller
 {
@@ -24,6 +26,7 @@ class AdminController extends Controller
         // replace this example code with whatever you need
         return $this->render('default/admin.html.twig',array('fixture'=>$tamaño));
     }
+
 
     /**
      * @Route("/admin/teamForm", name="createTeam")
@@ -66,40 +69,53 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/admin/asignarEditor", name="asignarEditor")
+     * @Route("/admin/editarPartidos", name="editarPartidos")
      *
      */
-    public function mostrarPartidosEditores() {
+    public function mostrarPartidosAction() {
         $partidos = $this->getDoctrine()
                         ->getRepository('AppBundle:Partido')
-                        ->findByEditor(NULL);
-
-                $editores = $this->getDoctrine()
-                ->getRepository('UserBundle:User')
-                ->findByEsEditor(1);
+                        ->findAll();
         return
-                $this->render('forms/asignarEditorForm.html.twig', array('partidos' => $partidos,
-                                                                        'editores' => $editores));
+                $this->render('forms/editarPartidos.html.twig', array('partidos' => $partidos));
     }
 
     /**
-     * @Route("/admin/vincularEditor/{idPartido}/{idEditor}", name="vincularEditor")
+     * @Route("/admin/editarPartido/{idPartido}", name="editarPartido")
+     *
      */
-     public function vincularEditorAction($idPartido,$idEditor)
-    {
-         $em = $this->getDoctrine()->getManager();
-        $partido = $em->getRepository('AppBundle:Partido')->find($idPartido);
-        $editor = $em->getRepository('UserBundle:User')->find($idEditor);
-        if (!$partido||!$editor) {
-            throw $this->createNotFoundException(
-                'No existe el partido o editor seleccionado' );
+    public function editarPartidoAction(Request $request, $idPartido) {
+        $partido = $this->getDoctrine()
+                        ->getRepository('AppBundle:Partido')
+                        ->find($idPartido);
+        $partidos = $this->getDoctrine()
+                         ->getRepository('AppBundle:Partido')
+                         ->findAll();
+
+        $form = $this->createForm(MatchFormType::class, $partido);
+        //Si es un post proceso los datos
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add('success', 'Partido editado')
+                ;
+            return $this->redirectToRoute('editarPartidos');
+
         }
 
-        $partido->setEditor($editor);
-        $em->flush();
+        $partidos = $this->getDoctrine()
+                        ->getRepository('AppBundle:Partido')
+                        ->findAll();
 
-        return $this->redirectToRoute('asignarEditor');
-         }
+        return $this->render('forms/editarPartido.html.twig', array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'form'=> $form->createView(),'idPartido' => $idPartido, 'partidos' => $partidos,
+        ));
+
+    }
 
      /**
       *@Route("/admin/crearFixture", name="crearFixture")

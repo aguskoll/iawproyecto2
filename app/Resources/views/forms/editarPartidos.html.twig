@@ -1,0 +1,44 @@
+{% extends '/default/admin.html.twig' %}
+
+{% block body %}
+<section id="about" class="container content-section text-center">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h2>Partidos: </h2>
+                <table border="1" >
+                    <ul id="navigation">
+                        {% if partidos is empty%}
+                          No hay partidos
+                          {% else %}
+                            {% for p in partidos %}
+                            {% set id = p.getId() %}
+                                 <tr>
+                                     <td>     Equipo1: {{ p.getEquipo1().getNombre() }}</td>
+                                      <td>    Equipo2: {{ p.getEquipo2().getNombre()  }} </td>
+                                        <td><a href="{{ path('editarPartido', {'idPartido': p.getId()}) }}" class="btn btn-info" role="button">Editar</a>
+                                        </td>
+                                 </tr>
+                            {% endfor %}
+                        {% endif %}
+                        </ul>
+                </table>
+        </div>
+    </div>
+</section>
+
+{% block form %}
+    <!-- {% if form is defined and form is not empty %}
+    <section class="main-block">
+        <article>
+            <section>
+               <form action="{{ path('editarPartido', {'idPartido': ( id ) }) }}" method="POST" novalidate="novalidate" enctype="multipart/form-data">
+                    {{ form_errors(form) }}
+                    {{ form_row(form.Editor) }}
+                    {{ form_row(form.Horario) }}
+                     {{ form_rest(form) }}
+                    <input type="submit" class="btn btn-primary pull-right" value="Registrar!" />
+                </form>
+    </section>
+    {% endif %}-->
+{% endblock %}
+{% endblock %}
