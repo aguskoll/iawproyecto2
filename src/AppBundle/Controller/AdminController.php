@@ -125,22 +125,39 @@ class AdminController extends Controller
         $em=$this->getDoctrine()->getManager();
         $equipos = $em->getRepository('AppBundle:Equipo')
                 ->findAll();
-        $tamaño=sizeof($equipos);
-        $partido;
-        for ($i = 0; $i < $tamaño - 1; $i++) {
-            for ($j = $i + 1; $j < $tamaño; $j++) {
-                $partido=new Partido();
-                $partido->setEquipo1($equipos[$i]);
-                $partido->setEquipo2($equipos[$j]);
-                $partido->setTermino(0);
-                $em->persist($partido);
-                $em->flush();
-             }
-        }
-        $request->getSession()
+        if($equipos == null){
+            $request->getSession()
                     ->getFlashBag()
-                    ->add('success', 'Fixture creado')
-                ;
-        return $this->redirectToRoute('adminPage');
+                    ->add('success', 'No hay equipos en el torneo');
+            return $this->redirectToRoute('adminPage');
+        }else{
+            $partidos = $em->getRepository('AppBundle:Partido')
+                ->findAll();
+            if($partidos != null){
+                $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'El fixture ya esta creado');
+                return $this->redirectToRoute('adminPage');
+            }else{
+        
+                $tamaño=sizeof($equipos);
+                $partido;
+                for ($i = 0; $i < $tamaño - 1; $i++) {
+                    for ($j = $i + 1; $j < $tamaño; $j++) {
+                        $partido=new Partido();
+                        $partido->setEquipo1($equipos[$i]);
+                        $partido->setEquipo2($equipos[$j]);
+                        $partido->setTermino(0);
+                        $em->persist($partido);
+                        $em->flush();
+                     }
+                }
+                $request->getSession()
+                            ->getFlashBag()
+                            ->add('success', 'Fixture creado')
+                        ;
+                return $this->redirectToRoute('adminPage');
+            }
+        }
      }
 }

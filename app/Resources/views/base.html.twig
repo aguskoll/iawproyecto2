@@ -33,13 +33,6 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-    {% if app.session.flashBag.has('success') %}
-        <div class="alert alert-success">
-            {% for msg in app.session.flashBag.get('success') %}
-                {{ msg }}
-            {% endfor %}
-        </div>
-    {% endif %}
 
     {% block navbar %}
         <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -128,12 +121,12 @@
 
     {% endblock %} 
 
-
 {% block body %}{% endblock %}
 
 
 <!-- Footer -->
 <footer>
+
     <div class="container text-center col-md-8 col-md-offset-2">
         <p>Copyright &copy; Autores: Koll-Larrieu</p>
     </div>

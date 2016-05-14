@@ -32,9 +32,17 @@
    </li>
 {% endblock %}
 {% block body %}
+
 <section id="admin" class="container content-section text-center">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2">
+        {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+{% endif %}
                <h2>Welcole admin</h2>
 		</div>
  	</div>
