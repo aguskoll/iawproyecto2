@@ -33,6 +33,32 @@
   margin-top: 10px;
   color: #fff;
 }
+
 .im-centered {
   margin: auto; max-width: 300px;
+}
+
+
+
+select{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #121212 !important;
+    color:#1d9b6c;
+    text-shadow:0 1px 0 rgba(0,0,0,0.4);
+}
+option:not(:checked) { 
+    background-color: #121212; 
+    color:#000;
+}
+.form-section{
+    width: 100%;
+    padding: 50px 0;
+    background-color: #121212;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
 }

@@ -21,8 +21,8 @@ public function buildForm(FormBuilderInterface $builder, array $options){
         'query_builder' => function (EntityRepository $er) {
         return $er->createQueryBuilder('u')
             ->where('u.esEditor = 1');
-    }, ))
-    ->add('Horario', TimeType::class, array('input'  => 'datetime', 'widget' => 'choice',));
+    }, 'attr' => array('class'=>'form-control')))
+    ->add('Horario', TimeType::class, array('input'  => 'datetime','widget' =>'single_text',));
 }
 
 

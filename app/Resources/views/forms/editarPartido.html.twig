@@ -1,19 +1,20 @@
 {% extends '/forms/editarPartidos.html.twig' %}
 
 {% block form %}
-<section id="form" class="container content-section text-center">
+<section id="match" class="container content-section text-center">
+<div class='form-section'>
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
             <h2>Editar partido: </h2>
-
-               <form action="{{ path('editarPartido', {'idPartido': ( idPartido ) }) }}" method="POST" novalidate="novalidate" enctype="multipart/form-data">
-                    {{ form_errors(form) }}
-                    {{ form_row(form.Editor) }}
+                <div class="im-centered row">
+                    <form action="{{ path('editarPartido', {'idPartido': ( idPartido ) }) }}" method="POST" novalidate="novalidate" enctype="multipart/form-data">
+                {{ form_errors(form) }}
+               {{ form_row(form.Editor) }}
                     {{ form_row(form.Horario) }}
-                     {{ form_rest(form) }}
-                    <input type="submit" class="btn btn-primary pull-right" value="Registrar!" />
-                </form>
+                <button type="submit" class="btn-default btn-lg movido">Edit</button>
+           </form>
         </div>
     </div>
+</div>
 </section>
 {% endblock %}
