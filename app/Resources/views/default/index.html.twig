@@ -2,6 +2,26 @@
 
 
 {% block body %}
+    <div>
+        <p></p>
+        <p></p>
+    </div>
+   <header class="intro" >
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading"> Torneo raza </h1>
+                        <p class="intro-text">Ultimate frisbee</p>
+                        <a class=" page-scroll ">
+                             <img class="img-responsive center-block" src="{{ asset('img/escudoCUBB2.jpg') }}" width="200" height="200" alt="escudoCUBB">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
     <section id="otro" class="container content-section text-center">
          <div class="row">
             <div class="box">
@@ -51,7 +71,7 @@
   <section id="about" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                 <h2>Donde entrenamos </h2>
+                 <h2>Donde jugamos </h2>
                  <ul class="list-inline">
                    <li>  
                         <div id="googleMap" style="width:500px;height:380px;"></div>
@@ -60,8 +80,43 @@
             </div>
             </div>
       </section>
-    <!--Seecion contacto -->
-    <section id="contact" class="container content-section text-center">
+ <section id="about" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                 <h2>Video de Ultimate Raza 2012</h2>
+                 <ul class="list-inline">
+                   <li>  
+                  <video width="400" controls>
+                   <source src="{{asset('video/muestra.mp4')}}" type="video/mp4">
+                 
+                 
+                 </video>
+                    </li>
+                 </ul>
+            </div>
+            </div>
+      </section>
+
+   <section id="contact" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Cuando se realizara y modalidad </h2>
+
+                <ul class="list-inline">
+                    <li>
+                       
+                        <p>   La 5ta edición del torneo raza </p>
+                         sera del 8 al 10 de octubre del 2016  
+                       <p> El torneo será modalidad mixta (3-4; 4-3) </p>
+                       <p> Jugamos canchas de césped natural y sintético, de tamaño reglamentarias, con iluminación.</p>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </section>
+
+ <section id="contact" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Contacte con ultimate cubb Bahia Blanca </h2>
@@ -76,7 +131,10 @@
                 </ul>
             </div>
         </div>
-    </section>
+ 
+ </section>
+    <!--Seecion contacto -->
+ 
 {% endblock %}
 
 {% block script %}
