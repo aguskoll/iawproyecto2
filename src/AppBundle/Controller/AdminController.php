@@ -82,6 +82,65 @@ class AdminController extends Controller
     }
 
     /**
+     * @Route("/admin/editarEquipos", name="editarEquipos")
+     *
+     */
+    public function mostrarEquiposAction() {
+        $equipos = $this->getDoctrine()
+                        ->getRepository('AppBundle:Equipo')
+                        ->findAll();
+        return
+                $this->render('forms/editarEquipos.html.twig', array('equipos' => $equipos));
+    }
+
+    /**
+     * @Route("/admin/editarEquipo/{idEquipo}", name="editarEquipo")
+     *
+     */
+    public function editarEquipoAction(Request $request, $idEquipo) {
+        $equipo = $this->getDoctrine()
+                        ->getRepository('AppBundle:Equipo')
+                        ->find($idEquipo);
+        $equipos = $this->getDoctrine()
+                         ->getRepository('AppBundle:Equipo')
+                         ->findAll();
+
+        $form = $this->createForm(TeamFormType::class, $equipo);
+        //Si es un post proceso los datos
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+           $logo = $equipo->getLogo();
+            if(! is_null($logo)){
+                // Generate a unique name for the file before saving it
+                $logoName = md5(uniqid()).'.'.$logo->guessExtension();
+
+                // Move the file to the directory where logos are stored
+                $logoDir = $this->container->getParameter('kernel.root_dir').'/../web/uploads/logos';
+                $logo->move($logoDir, $logoName);
+
+                // Update the 'logo' property to store the PDF file name
+                // instead of its contents
+                $equipo->setLogo($logoName);
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add('success', 'Equipo editado')
+                ;
+            return $this->redirectToRoute('adminPage');
+
+        }
+
+
+        return $this->render('forms/editarEquipo.html.twig', array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'form'=> $form->createView(),'idEquipo' => $idEquipo, 'equipos' => $equipos,
+        ));
+
+    }
+
+    /**
      * @Route("/admin/editarPartido/{idPartido}", name="editarPartido")
      *
      */
@@ -106,10 +165,6 @@ class AdminController extends Controller
             return $this->redirectToRoute('editarPartidos');
 
         }
-
-        $partidos = $this->getDoctrine()
-                        ->getRepository('AppBundle:Partido')
-                        ->findAll();
 
         return $this->render('forms/editarPartido.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),

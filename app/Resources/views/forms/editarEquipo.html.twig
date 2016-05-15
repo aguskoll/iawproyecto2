@@ -1,0 +1,32 @@
+{% extends '/forms/editarEquipos.html.twig' %}
+
+{% block form %}
+<section id="team" class="container content-section text-center">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h2>Editar equipo: </h2>
+                <div class="im-centered row">
+                    <form action="{{ path('editarEquipo', {'idEquipo': ( idEquipo ) }) }}" method="POST" enctype="multipart/form-data">
+                    {{ form_errors(form) }}
+                <div>
+                    {{ form_errors(form.nombre) }}
+                    {{ form_widget(form.nombre) }}
+                </div>
+                <div>
+                    {{ form_errors(form.origen)}}
+                    {{ form_widget(form.origen) }}
+                </div>
+                <div>
+                <br>
+                <label class="control-label">logo</label>
+                    {{ form_errors(form.logo)}}
+                    {{ form_widget(form.logo) }}
+                </div>
+                    {{ form_rest(form) }}
+                 <br>
+                <button type="submit" class="btn-default btn-lg movido">Edit </button>
+           </form>
+    </div>
+</div>
+</section>
+{% endblock %}

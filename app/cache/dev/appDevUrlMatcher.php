@@ -116,14 +116,27 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'AppBundle\\Controller\\AdminController::crearEquipo',  '_route' => 'createTeam',);
             }
 
-            if (0 === strpos($pathinfo, '/admin/editarPartido')) {
+            if (0 === strpos($pathinfo, '/admin/editar')) {
                 // editarPartidos
                 if ($pathinfo === '/admin/editarPartidos') {
                     return array (  '_controller' => 'AppBundle\\Controller\\AdminController::mostrarPartidosAction',  '_route' => 'editarPartidos',);
                 }
 
+                if (0 === strpos($pathinfo, '/admin/editarEquipo')) {
+                    // editarEquipos
+                    if ($pathinfo === '/admin/editarEquipos') {
+                        return array (  '_controller' => 'AppBundle\\Controller\\AdminController::mostrarEquiposAction',  '_route' => 'editarEquipos',);
+                    }
+
+                    // editarEquipo
+                    if (preg_match('#^/admin/editarEquipo/(?P<idEquipo>[^/]++)$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'editarEquipo')), array (  '_controller' => 'AppBundle\\Controller\\AdminController::editarEquipoAction',));
+                    }
+
+                }
+
                 // editarPartido
-                if (preg_match('#^/admin/editarPartido/(?P<idPartido>[^/]++)$#s', $pathinfo, $matches)) {
+                if (0 === strpos($pathinfo, '/admin/editarPartido') && preg_match('#^/admin/editarPartido/(?P<idPartido>[^/]++)$#s', $pathinfo, $matches)) {
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'editarPartido')), array (  '_controller' => 'AppBundle\\Controller\\AdminController::editarPartidoAction',));
                 }
 

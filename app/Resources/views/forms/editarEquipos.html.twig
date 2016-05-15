@@ -4,29 +4,31 @@
      <link href="{{ asset('css/login-style.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block body %}
-<section id="partidos" class="content-section text-center">
+<section id="equipos" class="content-section text-center">
 <div class='form-section'>
     <div class="container">
         <div class="col-lg-8 col-lg-offset-2">
-        {% if partidos is empty%}
-         <p>No hay partidos para editar</p>
+        {% if equipos is empty%}
+         <p>No hay equipos para editar</p>
         {% else %}
-            <h2>Partidos: </h2>
+            <h2>Equipos: </h2>
               <div class="table-responsive">
               <table class="table ">
                 <thead>
                      <tr>
-                         <th>Equipo A</th>
-                         <th>Equipo B</th>
+                         <th>Nombre</th>
+                         <th>Origen</th>
+                         <th>Logo</th>
                          <th> <span class="glyphicon glyphicon-edit"></span> </th>
                      </tr>
                 </thead>
-                <tbody> 
-                {% for p in partidos %}
+                <tbody>
+                {% for p in equipos %}
                  <tr>
-                     <td>     {{ p.getEquipo1().getNombre() }}</td>
-                      <td>    {{ p.getEquipo2().getNombre()  }} </td>
-                        <td><a href="{{ path('editarPartido', {'idPartido': p.getId()}) }}#match" class="btn" role="button">Editar</a>
+                     <td>   {{ p.getNombre() }}</td>
+                     <td>   {{ p.getOrigen() }} </td>
+                     <td>   {{ p.getLogo() }}</td>
+                        <td><a href="{{ path('editarEquipo', {'idEquipo': p.getId()}) }}#team" class="btn" role="button">Editar</a>
                         </td>
                  </tr>
                 {% endfor %}

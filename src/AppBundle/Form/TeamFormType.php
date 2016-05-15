@@ -22,7 +22,7 @@ public function buildForm(FormBuilderInterface $builder, array $options){
         ->add('origen', TextType::class,array('required' => false,
             'attr' => array('class'=>'input-txt','placeholder'=>'Ciudad origen')))
 
-        ->add('logo', FileType::class, array('required' => false,'attr' => array('class'=>'file btn-default'
+        ->add('logo', FileType::class, array('required' => false,'data_class' => null, 'attr' => array('class'=>'file btn-default'
                                                                 )));
 }
 
