@@ -1,5 +1,8 @@
 {% extends '/forms/editarPartidos.html.twig' %}
-
+{% block estilos %}
+    {{ parent() }}
+    <link href="{{ asset('css/login-style.css') }}" rel="stylesheet" />
+{% endblock %}
 {% block form %}
 <section id="match" class="container content-section text-center">
 <div class='form-section'>
@@ -11,6 +14,7 @@
                 {{ form_errors(form) }}
                {{ form_row(form.Editor) }}
                     {{ form_row(form.Horario) }}
+                    {{ form_rest(form) }}
                 <button type="submit" class="btn-default btn-lg movido">Edit</button>
            </form>
         </div>

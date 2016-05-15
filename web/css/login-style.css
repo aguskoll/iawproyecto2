@@ -39,6 +39,10 @@
 }
 
 
+input, time{
+    color: #121212;
+}
+
 
 select{
     margin-top: 10px;
