@@ -3,34 +3,7 @@
     {{ parent() }}
      <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
 {% endblock %}
-{% block navList %}
-	<li>
-        <a class="page-scroll"  href="{{path('homepage')}}">Home
-        <i class="glyphicon glyphicon-home"></i>
-        </a>
-    </li>
-        <li>
-        <a   class=" page-scroll" href="{{ path('adminPage') }}">
-            <i class="fa fa-lock"></i> {{ 'Menu administrador'|trans }}
-        </a>
-    </li>
 
-    <li>
-        <a  class="page-scroll" href="{{path('createTeam')}}">Crear equipo
-             <i class="glyphicon glyphicon-plus"></i>
-         </a>
-    </li>
-        <li>
-        <a   class=" page-scroll" href="{{ path('logout') }}">Editar equipo
-      <i class="glyphicon glyphicon-edit"></i>
-        </a>
-   </li>
-    <li>
-        <a   class=" page-scroll" href="{{ path('logout') }}">Logout
-      <i class="glyphicon glyphicon-log-out"></i>
-        </a>
-   </li>
-{% endblock %}
 {% block body %}
 
 <section id="admin" class="container content-section text-center">
@@ -52,7 +25,17 @@
 
             <a href="{{path('editarPartidos')}}" class="btn btn-sq-lg btn">
             <i class="fa fa-pencil fa-5x"></i><br/><br>
-            editar partidos
+            Editar partidos
+            </a>
+
+            <a href="{{path('createTeam')}}" class="btn btn-sq-lg btn">
+            <i class="fa fa-plus fa-5x"></i><br/><br>
+            Agregar equipo
+            </a>
+
+            <a href="{{path('editarEquipos')}}" class="btn btn-sq-lg btn">
+            <i class="fa fa-pencil fa-5x"></i><br/><br>
+            Editar equipos
             </a>
 
 		</div>
