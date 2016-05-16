@@ -418,4 +418,8 @@ body {
         display: table;
         clear: both;
     }
+
+    .table th {
+   text-align: center;   
+}
 }
