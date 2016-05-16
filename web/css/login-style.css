@@ -40,7 +40,8 @@
 
 
 input, time{
-    color: #121212;
+    color:#1d9b6c;
+    background: #121212 !important;
 }
 
 
@@ -51,6 +52,7 @@ select{
     color:#1d9b6c;
     text-shadow:0 1px 0 rgba(0,0,0,0.4);
 }
+
 option:not(:checked) { 
     background-color: #121212; 
     color:#000;

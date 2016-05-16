@@ -40,7 +40,7 @@ class Partido {
 
  
     /**
-     * @ORM\Column(type="time",nullable=true)
+     * @ORM\Column(type="datetime",nullable=true)
      */
     private $horario;
 
@@ -205,5 +205,38 @@ class Partido {
     
     function __construct() {
          $this->equipos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add equipos
+     *
+     * @param \AppBundle\Entity\Equipo $equipos
+     * @return Partido
+     */
+    public function addEquipo(\AppBundle\Entity\Equipo $equipos)
+    {
+        $this->equipos[] = $equipos;
+
+        return $this;
+    }
+
+    /**
+     * Remove equipos
+     *
+     * @param \AppBundle\Entity\Equipo $equipos
+     */
+    public function removeEquipo(\AppBundle\Entity\Equipo $equipos)
+    {
+        $this->equipos->removeElement($equipos);
+    }
+
+    /**
+     * Get equipos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEquipos()
+    {
+        return $this->equipos;
     }
 }

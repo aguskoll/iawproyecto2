@@ -170,4 +170,50 @@ class Equipo {
     
         $this->jugadores = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+    /**
+     * Add partidos
+     *
+     * @param \AppBundle\Entity\Partido $partidos
+     * @return Equipo
+     */
+    public function addPartido(\AppBundle\Entity\Partido $partidos)
+    {
+        $this->partidos[] = $partidos;
+
+        return $this;
+    }
+
+    /**
+     * Remove partidos
+     *
+     * @param \AppBundle\Entity\Partido $partidos
+     */
+    public function removePartido(\AppBundle\Entity\Partido $partidos)
+    {
+        $this->partidos->removeElement($partidos);
+    }
+
+    /**
+     * Add jugadores
+     *
+     * @param \AppBundle\Entity\Jugador $jugadores
+     * @return Equipo
+     */
+    public function addJugadore(\AppBundle\Entity\Jugador $jugadores)
+    {
+        $this->jugadores[] = $jugadores;
+
+        return $this;
+    }
+
+    /**
+     * Remove jugadores
+     *
+     * @param \AppBundle\Entity\Jugador $jugadores
+     */
+    public function removeJugadore(\AppBundle\Entity\Jugador $jugadores)
+    {
+        $this->jugadores->removeElement($jugadores);
+    }
 }

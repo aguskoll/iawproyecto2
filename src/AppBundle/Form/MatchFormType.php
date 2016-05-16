@@ -6,7 +6,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Doctrine\ORM\EntityRepository;
 
 class MatchFormType extends AbstractType
@@ -22,7 +22,7 @@ public function buildForm(FormBuilderInterface $builder, array $options){
         return $er->createQueryBuilder('u')
             ->where('u.esEditor = 1');
     }, 'attr' => array('class'=>'form-control')))
-    ->add('Horario', TimeType::class, array('input'  => 'datetime','widget' =>'single_text',));
+    ->add('Horario', DateTimeType::class, array('input'  => 'datetime','date_widget'=>'single_text','time_widget'=>'single_text',));
 }
 
 
