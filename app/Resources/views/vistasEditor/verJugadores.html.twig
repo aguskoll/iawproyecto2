@@ -21,20 +21,24 @@
                                 </thead>    
 
                                 <tbody> 
-                                    {% for j in jugadoresEquipo1%}
+                                    {% if jugadoresEquipo1 is empty %}
+                                {{'no hay jugadores cargados en equipo 1'}}   
+                                     {% else %}    
+                                        {% for j in jugadoresEquipo1%}
 
-                                        <tr>
-                                            <td>   
-                                                {{ j.getNombre() }}  
-                                            </td>
-                                            <td> 
-                                                <a href="{{path('asignarEstadisticas',{'idJugador':j.getId(),'idPartido': partido.getId() }) }}" class=" btn " > 
-                                                    {{'Asignar estadisticas del partido'|trans}}
-                                                </a>  
-                                            </td> 
+                                            <tr>
+                                                <td>   
+                                                    {{ j.getNombre() }}  
+                                                </td>
+                                                <td> 
+                                                    <a href="{{path('asignarEstadisticas',{'idJugador':j.getId(),'idPartido': partido.getId() }) }}" class=" btn " > 
+                                                        {{'Asignar estadisticas del partido'|trans}}
+                                                    </a>  
+                                                </td> 
 
-                                        </tr>
-                                    {% endfor %}
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
                                 </tbody>
                             </table>
                         </div>
@@ -50,7 +54,9 @@
                                 </thead>    
 
                                 <tbody> 
-
+                    {% if jugadoresEquipo2 is empty %}
+                                {{'no hay jugadores cargados en equipo 2'}}   
+                                     {% else %}   
                                     {% for j in jugadoresEquipo2%}
 
                                         <tr>
@@ -63,8 +69,9 @@
                                         </tr>
 
                                     {% endfor %}
+                                    {% endif %}
                                 </tbody> 
-
+                                    
 
                             </table>
                         </div>

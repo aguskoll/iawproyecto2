@@ -20,6 +20,9 @@
                         </thead>    
                         <!--ul id="navigation"-->
                         <tbody> 
+                           {% if partidos is empty %}
+                                {{'no hay partidos cargados'}}   
+                              {% else %}    
                             {% for p in partidos %}
                                 {% if not p.getTermino() %}
                                     <tr>
@@ -38,10 +41,14 @@
                                     </tr>
                                 {% endif %}
                             {% endfor %}
+                                {% endif %}
                         </tbody>
                     </table> 
                 </div>  
                         <div>
+                            <p></p>
+                            <p></p>
+
                         </div>
                 <div class="table-responsive">
                     <table class="table ">
@@ -58,6 +65,7 @@
                         </thead>    
                         <!--ul id="navigation"-->
                         <tbody> 
+                           
                             {% for p in partidos %}
                                 {% if p.getTermino() %}
                                     <tr>
@@ -84,6 +92,7 @@
                                     </tr>
                                 {% endif %}
                             {% endfor %}
+                        
                             <!--/ul-->
                         </tbody>
                     </table> 

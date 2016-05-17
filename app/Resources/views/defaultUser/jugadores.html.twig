@@ -22,17 +22,20 @@
                                 </tr>    
                             </thead>    
                          <tbody> 
-                            {% for j in jugadores %}
+                           {% if jugadores is empty %}
+                             {{'no hay jugadores cargados'}}   
+                        {% else %}    
+                                    {% for j in jugadores %}
 
-                             <tr>     
-                                        <td>{{j.getNombre()}}</td>
-                                         <td> {{ j.getEquipo().getNombre()}}</td> 
-                                         <td> {{ j.getPuntos()}}</td>
-                                         <td> {{ j.getAsistencias()}}</td>
-                                         <td> {{ j.getDefensas()}}</td>
-                             </tr>
-                        {% endfor %}
-
+                                     <tr>     
+                                                <td>{{j.getNombre()}}</td>
+                                                 <td> {{ j.getEquipo().getNombre()}}</td> 
+                                                 <td> {{ j.getPuntos()}}</td>
+                                                 <td> {{ j.getAsistencias()}}</td>
+                                                 <td> {{ j.getDefensas()}}</td>
+                                     </tr>
+                                {% endfor %}
+                           {% endif %} 
                      </tbody>
                  </table> 
               </div>  

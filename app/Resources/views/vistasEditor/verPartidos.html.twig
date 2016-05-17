@@ -18,6 +18,9 @@
                         </thead>    
     
                   <tbody> 
+             {% if partidos is empty %}
+                       {{'no hay partidos cargados'}}   
+                        {% else %}    
             {% for p in partidos %}
                
                  <tr>
@@ -57,6 +60,7 @@
                       </td>
                  </tr>
             {% endfor %}
+            {% endif %}
                     </tbody>
                         </table> 
                        </div>  
