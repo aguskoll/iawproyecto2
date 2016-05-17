@@ -11,8 +11,8 @@
             <h2>Editar partido: </h2>
                 <div class="im-centered row">
                     <form action="{{ path('editarPartido', {'idPartido': ( idPartido ) }) }}" method="POST" enctype="multipart/form-data">
-                {{ form_errors(form) }}
-               {{ form_row(form.Editor) }}
+                    {{ form_errors(form) }}
+                    {{ form_row(form.Editor) }}
                     {{ form_row(form.Horario) }}
                     {{ form_rest(form) }}
                 <button type="submit" class="btn-default btn-lg movido">Edit</button>

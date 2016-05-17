@@ -138,4 +138,15 @@ class DefaultUserController extends Controller {
 
         return $this->render('defaultUser/jugadores.html.twig', array('jugadores' => $jugadores));
    }
+   
+   /**
+     * Muestrala el readme de la pagina
+     * @Route("/readme", name="readme")
+     */
+   public function readmeAction()
+    {
+        
+        return $this->render('defaultUser/readme.html.twig');
+        
+    }
 }

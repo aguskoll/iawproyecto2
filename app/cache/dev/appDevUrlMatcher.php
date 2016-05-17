@@ -147,6 +147,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'AppBundle\\Controller\\AdminController::crearFixture',  '_route' => 'crearFixture',);
             }
 
+            // agregarJugador
+            if ($pathinfo === '/admin/agregarJugador') {
+                return array (  '_controller' => 'AppBundle\\Controller\\AdminController::agregarJugador',  '_route' => 'agregarJugador',);
+            }
+
         }
 
         // homepage
@@ -184,6 +189,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // jugadoresPorEquipo
         if (0 === strpos($pathinfo, '/jugadores') && preg_match('#^/jugadores/(?P<idEquipo>[^/]++)$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'jugadoresPorEquipo')), array (  '_controller' => 'AppBundle\\Controller\\DefaultUserController::obtenerJugadoresPorEquipoAction',));
+        }
+
+        // readme
+        if ($pathinfo === '/readme') {
+            return array (  '_controller' => 'AppBundle\\Controller\\DefaultUserController::readmeAction',  '_route' => 'readme',);
         }
 
         if (0 === strpos($pathinfo, '/editor')) {

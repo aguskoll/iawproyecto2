@@ -49,13 +49,8 @@ class EditorController extends Controller
          $jugador = $em->getRepository('AppBundle:Jugador')
                 ->find($idJugador);
         
-         if(!$jugador){
-         
-         throw $this->createNotFoundException('Error al editar jugador');
-     }
-      //   echo '<html><body>usuario nombre:'.$jugador->getNombre().'</body></html>';  
         
-         $default = array('message' => 'Type your message here');;
+         $default = array('message' => 'Type your message here');
          $form=$this->createFormBuilder( $default)
             ->add('puntos', 'integer')
             ->add('asistencias', 'integer')
@@ -128,10 +123,7 @@ class EditorController extends Controller
      $em=$this->getDoctrine()->getManager();
      $partido = $em->getRepository('AppBundle:Partido')
                 ->find($idPartido);
-     if(!$partido){
-         
-         throw $this->createNotFoundException('partido no encontrado');
-     }
+     
      $form=$this->createFormBuilder($partido)
             ->add('puntosEquipo1', 'integer')
             ->add('puntosEquipo2', 'integer')

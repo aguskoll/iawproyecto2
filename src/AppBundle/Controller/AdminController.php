@@ -10,6 +10,7 @@ use AppBundle\Form\TeamFormType;
 use AppBundle\Form\MatchFormType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use AppBundle\Entity\Partido;
+use AppBundle\Entity\Jugador;
 use UserBundle\Entity\User;
 
 class AdminController extends Controller
@@ -215,4 +216,53 @@ class AdminController extends Controller
             }
         }
      }
+     
+     /**
+      *@Route("/admin/agregarJugador", name="agregarJugador")
+      */
+     public function agregarJugador(Request $request){
+        $em=$this->getDoctrine()->getManager();
+        
+        
+       $default = array('message' => 'Type your message here');
+        $form = $this->createFormBuilder($default)
+            ->add('nombre', 'text')
+            ->add('equipo', 'text')
+            
+            ->getForm();
+
+      
+       $form->handleRequest($request);
+        if ($form->isValid()) {
+         
+            
+            
+            $nombreEquipo=$form->get('equipo')->getData();
+           
+            $equipo = $em->getRepository('AppBundle:Equipo')
+                   ->findOneByNombre($nombreEquipo);
+        if($equipo!=null){
+            $jugador= new Jugador();
+            $jugador->setNombre($form->get('nombre')->getData());
+            $jugador->setEquipo($equipo);
+            
+            $em->persist($jugador);
+            $em->flush();
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add('success', 'Jugador creado');
+        }
+        else{
+            
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add('fallo', 'El quipo no existe');
+        }
+            return $this->redirectToRoute('adminPage');
+        }
+     return $this->render('forms/agregarJugador.html.twig', array(
+           'form'=> $form->createView()));
+        
+        
+        }
 }
