@@ -27,7 +27,7 @@ class DefaultController extends Controller
 
     
     /**
-     * @Route("/", name="home")
+     * @Route("/home", name="home")
      */
     public function homeAction(Request $request)
     {
@@ -37,6 +37,5 @@ class DefaultController extends Controller
         ));
     }
     
-      
-   
+         
 }

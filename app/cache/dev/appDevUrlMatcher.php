@@ -152,11 +152,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'AppBundle\\Controller\\AdminController::agregarJugador',  '_route' => 'agregarJugador',);
             }
 
-            // homeAdmin
-            if ($pathinfo === '/admin/home') {
-                return array (  '_controller' => 'AppBundle\\Controller\\AdminController::homeAdminAction',  '_route' => 'homeAdmin',);
-            }
-
         }
 
         // homepage
@@ -169,11 +164,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         // home
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'home');
-            }
-
+        if ($pathinfo === '/home') {
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::homeAction',  '_route' => 'home',);
         }
 

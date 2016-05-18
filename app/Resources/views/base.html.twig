@@ -73,7 +73,7 @@
                              {% if is_granted('ROLE_ADMIN') %}
                                   {% if app.request.get('_route') == 'homepage' %}
                                         <li>
-                                           <a   class=" page-scroll" href="{{ path('homeAdmin') }}">
+                                           <a   class=" page-scroll" href="{{ path('home') }}">
                                                <i class="glyphicon glyphicon-home"></i> {{ 'Home'|trans }}
                                            </a>
                                        </li>
