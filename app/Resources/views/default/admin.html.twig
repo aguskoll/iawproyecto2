@@ -22,7 +22,7 @@ Admin
             {% endif %}
             
             {% if app.session.flashBag.has('fallo') %}
-            <div class="alert alert-success">
+            <div class="alert alert-danger">
                 {% for msg in app.session.flashBag.get('fallo') %}
                     {{ msg }}
                 {% endfor %}
@@ -52,7 +52,7 @@ Admin
 
             <a href="{{path('agregarJugador')}}" class="btn btn-sq-lg btn">
             <i class="fa fa-plus fa-5x"></i><br/><br>
-            Agreagar Jugador 
+            Nuevo jugador 
             </a>
 		</div>
  	</div>

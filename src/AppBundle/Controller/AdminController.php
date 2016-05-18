@@ -8,6 +8,7 @@ use AppBundle\Entity\Equipo;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use AppBundle\Form\TeamFormType;
 use AppBundle\Form\MatchFormType;
+use AppBundle\Form\PlayerFormType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use AppBundle\Entity\Partido;
 use AppBundle\Entity\Jugador;
@@ -33,12 +34,23 @@ class AdminController extends Controller
      * @Route("/admin/teamForm", name="createTeam")
      */
     public function crearEquipo(Request $request){
+        $em=$this->getDoctrine()->getManager();
+        $partidos = $em->getRepository('AppBundle:Partido')
+                ->findAll();
+        $tamaño=sizeof($partidos);
         $equipo = new Equipo();
         $form = $this->createForm(TeamFormType::class, $equipo);
 
         //Si es un post proceso los datos
         $form->handleRequest($request);
         if ($form->isValid()) {
+                   if($tamaño > 0){
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add('fallo', 'No es posible crear equipos en un torneo iniciado')
+                ;
+            return $this->redirectToRoute('adminPage');
+        }
             $logo = $equipo->getLogo();
             if(! is_null($logo)){
                 // Generate a unique name for the file before saving it
@@ -221,49 +233,28 @@ class AdminController extends Controller
       *@Route("/admin/agregarJugador", name="agregarJugador")
       */
      public function agregarJugador(Request $request){
-        $em=$this->getDoctrine()->getManager();
-        
-        
-       $default = array('message' => 'Type your message here');
-        $form = $this->createFormBuilder($default)
-            ->add('nombre', 'text')
-            ->add('equipo', 'text')
-            
-            ->getForm();
+        $jugador = new Jugador();
+        $form = $this->createForm(PlayerFormType::class, $jugador);
 
-      
-       $form->handleRequest($request);
+        //Si es un post proceso los datos
+        $form->handleRequest($request);
         if ($form->isValid()) {
-         
-            
-            
-            $nombreEquipo=$form->get('equipo')->getData();
-           
-            $equipo = $em->getRepository('AppBundle:Equipo')
-                   ->findOneByNombre($nombreEquipo);
-        if($equipo!=null){
-            $jugador= new Jugador();
-            $jugador->setNombre($form->get('nombre')->getData());
-            $jugador->setEquipo($equipo);
-            
+            $em = $this->getDoctrine()->getManager();
             $em->persist($jugador);
             $em->flush();
             $request->getSession()
                     ->getFlashBag()
-                    ->add('success', 'Jugador creado');
-        }
-        else{
-            
-            $request->getSession()
-                    ->getFlashBag()
-                    ->add('fallo', 'El quipo no existe');
-        }
+                    ->add('success', 'Jugador creado')
+                ;
             return $this->redirectToRoute('adminPage');
+
         }
-     return $this->render('forms/agregarJugador.html.twig', array(
-           'form'=> $form->createView()));
-        
-        
+
+        return $this->render('forms/agregarJugador.html.twig', array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'form'=> $form->createView(),
+        ));
+
         }
         
          /**

@@ -7,7 +7,7 @@
  */
 
 namespace AppBundle\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
  /**
  * @ORM\Entity
@@ -25,6 +25,7 @@ class Jugador {
     
    /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Debe tener un nombre")
      */
    private  $nombre;
    
@@ -42,6 +43,7 @@ class Jugador {
    /**
      * @ORM\ManyToOne(targetEntity="Equipo",inversedBy="jugadores" )
      * @ORM\JoinColumn(name="jugadores_equipo", referencedColumnName="id")
+     * @Assert\NotBlank(message="Debe tener un Equipo")
      */
    private $equipo;
     
