@@ -2,81 +2,88 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-   <section class="container content-section ">
-     <div class="row">   
-          <div class="col-lg-8 col-lg-offset-2"> 
-           
-             <h2>Jugadores:</h2>
-             <table border="0">  
-                 <td>    
-                            <h4>{{equipo1.getNombre()}}</h4>
-                               <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>  Nombre </th>
-                                                         <th>    </th>
-                                                       
-                                                    </tr>    
-                                                </thead>    
-                                  
-                                         <tbody> 
-                                       {% for j in jugadoresEquipo1%}
+    <section class="container content-section ">
+        <div class="row">   
+            <div class="col-lg-8 col-lg-offset-2"> 
+
+                <h2>Jugadores:</h2>
+                <table border="0">  
+                    <td>    
+                        <h4>{{equipo1.getNombre()}}</h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>  Nombre </th>
+                                        <th>    </th>
+
+                                    </tr>    
+                                </thead>    
+
+                                <tbody> 
+                                    {% if jugadoresEquipo1 is empty %}
+                                {{'no hay jugadores cargados en equipo 1'}}   
+                                     {% else %}    
+                                        {% for j in jugadoresEquipo1%}
 
                                             <tr>
                                                 <td>   
-                                                {{ j.getNombre() }}  
+                                                    {{ j.getNombre() }}  
                                                 </td>
                                                 <td> 
-                                                    <a href="{{path('asignarEstadisticas',{'idJugador':j.getId(),'idPartido': partido.getId() }) }}" class=" btn btn-sm btn-primary" > 
+                                                    <a href="{{path('asignarEstadisticas',{'idJugador':j.getId(),'idPartido': partido.getId() }) }}" class=" btn " > 
                                                         {{'Asignar estadisticas del partido'|trans}}
-                                                     </a>  
-                                                 </td> 
-                                               
+                                                    </a>  
+                                                </td> 
+
                                             </tr>
-                                       {% endfor %}
-                                 </tbody>
+                                        {% endfor %}
+                                    {% endif %}
+                                </tbody>
                             </table>
-                             </div>
-                                <h4> {{equipo2.getNombre()}}</h4>
-                                    <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>  Nombre </th>
-                                                         <th>    </th>
-                                                       
-                                                    </tr>    
-                                                </thead>    
+                        </div>
+                        <h4> {{equipo2.getNombre()}}</h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>  Nombre </th>
+                                        <th>    </th>
 
-                                          <tbody> 
+                                    </tr>    
+                                </thead>    
 
-                                            {% for j in jugadoresEquipo2%}
+                                <tbody> 
+                    {% if jugadoresEquipo2 is empty %}
+                                {{'no hay jugadores cargados en equipo 2'}}   
+                                     {% else %}   
+                                    {% for j in jugadoresEquipo2%}
 
-                                                 <tr>
-                                                     <td>    {{ j.getNombre() }}  </td>
-<td>                                               <td>
-                                                    <a href="{{path('asignarEstadisticas',{'idJugador':j.getId(),'idPartido': partido.getId() }) }}" class=" btn btn-sm btn-primary" > 
-                                                        {{'Asignar estadisticas del partido'|trans}}
-                                                     </a>  
-                                                 </td> 
-                                                 </tr>
-                                                 
-                                            {% endfor %}
-                                             </tbody> 
-                                  
+                                        <tr>
+                                            <td>    {{ j.getNombre() }}  </td>
+                                            <td>                                               <td>
+                                                <a href="{{path('asignarEstadisticas',{'idJugador':j.getId(),'idPartido': partido.getId() }) }}" class=" btn " > 
+                                                    {{'Asignar estadisticas del partido'|trans}}
+                                                </a>  
+                                            </td> 
+                                        </tr>
 
-                                              </table>
-                                             </div>
-                      </td>
-                      
-                      <td>
-                      <!--aca iria la columna para editar jugador -->
-                     
-                      </td>
-                    </table>
-                     </div>
-		</div>
-	</section>
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody> 
+                                    
+
+                            </table>
+                        </div>
+                    </td>
+
+                    <td>
+                        <!--aca iria la columna para editar jugador -->
+
+                    </td>
+                </table>
+            </div>
+        </div>
+    </section>
 {% endblock %}
 

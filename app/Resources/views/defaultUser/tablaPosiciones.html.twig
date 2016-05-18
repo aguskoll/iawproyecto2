@@ -16,24 +16,27 @@
                               </tr>
                              </thead>    
                 <tbody> 
-           
+                    {% if equipos is empty %}
+                     {{'no hay equipos cargados'}}   
+        {% else %}    
             {% for e in equipos%}
-               
-                 <tr>
-                     <td>   
-                        {{ e.getNombre() }}  
-                     </td>
-                     <td> 
-                        {{e.getPartidosGanados()}}
-                      </td> 
-                     <td>
-                         {{e.getPartidosJugados()}}
-                      </td>
-                      <td>
-                         {{e.getGoles()}}
-                      </td>
-                 </tr>
-            {% endfor %}
+
+                     <tr>
+                         <td>   
+                            {{ e.getNombre() }}  
+                         </td>
+                         <td> 
+                            {{e.getPartidosGanados()}}
+                          </td> 
+                         <td>
+                             {{e.getPartidosJugados()}}
+                          </td>
+                          <td>
+                             {{e.getGoles()}}
+                          </td>
+                     </tr>
+                {% endfor %}
+               {% endif %} 
                     </tbody>
                  </table> 
               </div>  

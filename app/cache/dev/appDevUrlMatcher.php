@@ -147,6 +147,16 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'AppBundle\\Controller\\AdminController::crearFixture',  '_route' => 'crearFixture',);
             }
 
+            // agregarJugador
+            if ($pathinfo === '/admin/agregarJugador') {
+                return array (  '_controller' => 'AppBundle\\Controller\\AdminController::agregarJugador',  '_route' => 'agregarJugador',);
+            }
+
+            // homeAdmin
+            if ($pathinfo === '/admin/home') {
+                return array (  '_controller' => 'AppBundle\\Controller\\AdminController::homeAdminAction',  '_route' => 'homeAdmin',);
+            }
+
         }
 
         // homepage
@@ -156,6 +166,15 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
 
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
+        }
+
+        // home
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'home');
+            }
+
+            return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::homeAction',  '_route' => 'home',);
         }
 
         if (0 === strpos($pathinfo, '/mostrar')) {
@@ -184,6 +203,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // jugadoresPorEquipo
         if (0 === strpos($pathinfo, '/jugadores') && preg_match('#^/jugadores/(?P<idEquipo>[^/]++)$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'jugadoresPorEquipo')), array (  '_controller' => 'AppBundle\\Controller\\DefaultUserController::obtenerJugadoresPorEquipoAction',));
+        }
+
+        // readme
+        if ($pathinfo === '/readme') {
+            return array (  '_controller' => 'AppBundle\\Controller\\DefaultUserController::readmeAction',  '_route' => 'readme',);
         }
 
         if (0 === strpos($pathinfo, '/editor')) {

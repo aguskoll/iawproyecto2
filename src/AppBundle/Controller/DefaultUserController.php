@@ -33,11 +33,8 @@ class DefaultUserController extends Controller {
                 ->getRepository('AppBundle:Equipo')
                 ->findAll();
 
-        if (!$equipos) {
-            throw $this->createNotFoundException('No se encontro ningun equipo ');
-        }
-//debug:
- //   echo '<html><body>cant equipos'.count($equipos).'</body></html>';
+       
+
         return
                 $this->render('defaultUser/equipos.html.twig', array('equipos' => $equipos));
     }
@@ -51,11 +48,8 @@ class DefaultUserController extends Controller {
                 ->getRepository('AppBundle:Partido')
                 ->findByTerminado($terminado);
 
-        if (!$partidos) {
-            throw $this->createNotFoundException(
-                    'No hay partidos '
-            );
-        }
+       
+        
 
         // Se le debe pasar el objeto a un template
         return $this->render(
@@ -76,14 +70,7 @@ class DefaultUserController extends Controller {
                 ->getRepository('AppBundle:Partido')
                 ->findAll();
 
-        if (!$partidos) {
-            throw $this->createNotFoundException(
-                    'No hay partidos '
-            );
-        }
-
-        //debug:
-      //   echo '<html><body>cant partidos'.count($partidos).'</body></html>';
+  
 
         return
                 $this->render('defaultUser/partidos.html.twig', array('partidos' => $partidos));
@@ -130,12 +117,19 @@ class DefaultUserController extends Controller {
                 ->getRepository('AppBundle:Jugador')
                 ->findByEquipo($idEquipo);
 
-        if (!$jugadores) {
-            throw $this->createNotFoundException(
-                    'No hay partidos '
-            );
-        }
+       
 
         return $this->render('defaultUser/jugadores.html.twig', array('jugadores' => $jugadores));
    }
+   
+   /**
+     * Muestrala el readme de la pagina
+     * @Route("/readme", name="readme")
+     */
+   public function readmeAction()
+    {
+        
+        return $this->render('defaultUser/readme.html.twig');
+        
+    }
 }

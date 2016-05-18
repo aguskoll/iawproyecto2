@@ -1,0 +1,37 @@
+{% extends '/default/admin.html.twig' %}
+{% block estilos %}
+    {{ parent() }}
+     <link href="{{ asset('css/login-style.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+<section id="team"  class="container content-section text-center">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h2>Agregar jugador</h2>
+            <div class="im-centered row">
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'role' : 'form'}}) }}
+                <h4 class="text-danger">{{ form_errors(form) }}</h4>  
+                 <fieldset>
+               
+                 <div class="form-group">
+                        {{' Nombre ' }}
+                        {{ form_widget(form.nombre, {'attr': {'class': 'form-control', 'placeholder' : 'Nombre del jugador'}}) }}
+                        <span class="text-danger">{{ form_errors(form.nombre) }}</span>
+                </div>
+               
+               <div class="form-group">
+                        {{' Equipo 1' }}
+                        {{ form_widget(form.equipo, {'attr': {'class': 'form-control', 'placeholder' : 'Equipo del equipo'}}) }}
+                        <span class="text-danger">{{ form_errors(form.equipo) }}</span>
+                
+               </div>
+                        
+                   
+                 <br>
+                <button type="submit" class="btn-default btn-lg movido">Agregar jugador </button>
+            </fieldset>
+           {{ form_end(form) }}
+        </div>
+    </div>
+</section>
+{% endblock %}
