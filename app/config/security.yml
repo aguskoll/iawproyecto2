@@ -16,9 +16,12 @@ security:
             form_login:
                 login_path: loginForm
                 check_path: loginCheck
+                use_referer: false
+                success_handler: login_success_handler
             logout:
                 path: logout
                 target: homepage
+
 
     access_control:
         - { path: ^/admin, roles: [ROLE_ADMIN] }

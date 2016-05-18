@@ -256,16 +256,4 @@ class AdminController extends Controller
         ));
 
         }
-        
-         /**
-     * @Route("/admin/home", name="homeAdmin")
-     */
-   /* public function homeAdminAction(Request $request)
-    {
-      
-        return $this->render('default/index.html.twig', array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        ));
-    }
-    */
 }

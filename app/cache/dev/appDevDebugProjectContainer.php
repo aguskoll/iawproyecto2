@@ -123,6 +123,7 @@ class appDevDebugProjectContainer extends Container
             'kernel.class_cache.cache_warmer' => 'getKernel_ClassCache_CacheWarmerService',
             'locale_listener' => 'getLocaleListenerService',
             'logger' => 'getLoggerService',
+            'login_success_handler' => 'getLoginSuccessHandlerService',
             'monolog.handler.console' => 'getMonolog_Handler_ConsoleService',
             'monolog.handler.debug' => 'getMonolog_Handler_DebugService',
             'monolog.handler.main' => 'getMonolog_Handler_MainService',
@@ -1492,6 +1493,19 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'login_success_handler' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \UserBundle\Security\Authentication\Handler\LoginSuccessHandler A UserBundle\Security\Authentication\Handler\LoginSuccessHandler instance.
+     */
+    protected function getLoginSuccessHandlerService()
+    {
+        return $this->services['login_success_handler'] = new \UserBundle\Security\Authentication\Handler\LoginSuccessHandler($this->get('router'), $this->get('security.context'));
+    }
+
+    /**
      * Gets the 'monolog.handler.console' service.
      *
      * This service is shared.
@@ -1998,16 +2012,12 @@ class appDevDebugProjectContainer extends Container
         $l = new \Symfony\Component\Security\Http\Firewall\LogoutListener($b, $k, new \Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler($k, 'homepage'), array('csrf_parameter' => '_csrf_token', 'csrf_token_id' => 'logout', 'logout_path' => 'logout'));
         $l->addHandler(new \Symfony\Component\Security\Http\Logout\SessionLogoutHandler());
 
-        $m = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler($k, array());
-        $m->setOptions(array('login_path' => 'loginForm', 'always_use_default_target_path' => false, 'default_target_path' => '/', 'target_path_parameter' => '_target_path', 'use_referer' => false));
-        $m->setProviderKey('areaSegura');
+        $m = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $k, array(), $a);
+        $m->setOptions(array('login_path' => 'loginForm', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'));
 
-        $n = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $k, array(), $a);
-        $n->setOptions(array('login_path' => 'loginForm', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'));
+        $n = new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $k, 'loginForm', false);
 
-        $o = new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $k, 'loginForm', false);
-
-        return $this->services['security.firewall.map.context.areasegura'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($j, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.users')), 'areaSegura', $a, $c), 2 => $l, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $k, 'areaSegura', $m, $n, array('check_path' => 'loginCheck', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'csrf_token_id' => 'authenticate', 'post_only' => true), $a, $c, NULL), 4 => new \Symfony\Component\Security\Http\Firewall\BasicAuthenticationListener($b, $f, 'areaSegura', $o, $a), 5 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '573cd0775c96e3.29054447', $a, $f), 6 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $j, $f)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $k, 'areaSegura', $o, NULL, NULL, $a, false));
+        return $this->services['security.firewall.map.context.areasegura'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($j, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.users')), 'areaSegura', $a, $c), 2 => $l, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $k, 'areaSegura', new \Symfony\Component\Security\Http\Authentication\CustomAuthenticationSuccessHandler($this->get('login_success_handler'), array('login_path' => 'loginForm', 'use_referer' => false, 'always_use_default_target_path' => false, 'default_target_path' => '/', 'target_path_parameter' => '_target_path'), 'areaSegura'), $m, array('check_path' => 'loginCheck', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'csrf_token_id' => 'authenticate', 'post_only' => true), $a, $c, NULL), 4 => new \Symfony\Component\Security\Http\Firewall\BasicAuthenticationListener($b, $f, 'areaSegura', $n, $a), 5 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '573ce4cdc25fa2.68292954', $a, $f), 6 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $j, $f)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $k, 'areaSegura', $n, NULL, NULL, $a, false));
     }
 
     /**
@@ -3338,7 +3348,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.users'), $this->get('security.user_checker.areasegura'), 'areaSegura', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('573cd0775c96e3.29054447')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.users'), $this->get('security.user_checker.areasegura'), 'areaSegura', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('573ce4cdc25fa2.68292954')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -3554,6 +3564,7 @@ class appDevDebugProjectContainer extends Container
             'mailer_user' => NULL,
             'mailer_password' => NULL,
             'secret' => '9862ce0c2856e6a706bff0877e7e1cdd072efe9f',
+            'user_login.authentication.handler.login_success_handler.class' => 'UserBundle\\Security\\Authentication\\Handler\\LoginSuccessHandler',
             'locale' => 'en',
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
             'controller_name_converter.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerNameParser',

@@ -163,11 +163,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
         }
 
-        // home
-        if ($pathinfo === '/home') {
-            return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::homeAction',  '_route' => 'home',);
-        }
-
         if (0 === strpos($pathinfo, '/mostrar')) {
             // mostrarEquipos
             if ($pathinfo === '/mostrarEquipos') {

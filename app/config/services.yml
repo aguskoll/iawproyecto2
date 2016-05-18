@@ -1,9 +1,11 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
-#    parameter_name: value
+  user_login.authentication.handler.login_success_handler.class: UserBundle\Security\Authentication\Handler\LoginSuccessHandler
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+  login_success_handler:
+    class:      %user_login.authentication.handler.login_success_handler.class%
+    arguments:  [@router, @security.context]
+    tags:
+        - { name: 'monolog.logger', channel: 'security' }

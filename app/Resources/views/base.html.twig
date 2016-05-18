@@ -63,29 +63,20 @@
                                 <a href="#page-top"></a>
                             </li>
                             {% block navList %}
-                            {% if app.request.get('_route') != 'homepage' %}
-                            <li>
-                                <a class="page-scroll"  href="{{path('home')}}">Home
-                                <i class="glyphicon glyphicon-home"></i>
-                                </a>
-                            </li>
-                            {% endif %}
-                             {% if is_granted('ROLE_ADMIN') %}
-                                  {% if app.request.get('_route') == 'homepage' %}
+                                  {% if app.request.get('_route') != 'homepage' %}
                                         <li>
-                                           <a   class=" page-scroll" href="{{ path('home') }}">
-                                               <i class="glyphicon glyphicon-home"></i> {{ 'Home'|trans }}
+                                           <a   class=" page-scroll" href="{{ path('homepage') }}">
+                                               <i class="glyphicon glyphicon-home"></i> Home
                                            </a>
                                        </li>
                                     {% endif %}
-                                <li>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <li>
                                     <a   class=" page-scroll" href="{{ path('adminPage') }}">
                                         <i class="fa fa-lock"></i> {{ 'Menu administrador'|trans }}
                                     </a>
-                                </li>
-                                
-                               
-                            {% endif %}
+                                    </li>
+                                    {% endif %}
                             <li>
                                 <a class="page-scroll"  href="{{path('mostrarTodos')}}">Fixture
                                 <i class="glyphicon glyphicon-calendar"></i>  
