@@ -16,12 +16,15 @@
 }
 .input-txt:-moz-placeholder {
   color: #1d9b6c;
+  font:lora;
 }
 .input-txt:-ms-input-placeholder {
   color: #1d9b6c;
+  font:lora;
 }
 .input-txt::-webkit-input-placeholder {
   color: #1d9b6c;
+  font:lora;
 }
 .input-txt:focus {
   background-color: #121212;
@@ -46,10 +49,11 @@ input, time{
 
 
 select{
+  outline: none;
     margin-top: 10px;
     margin-bottom: 10px;
     background: #121212 !important;
-    color:#1d9b6c;
+    color:#1d9b6c !important;
     text-shadow:0 1px 0 rgba(0,0,0,0.4);
 }
 
@@ -66,5 +70,9 @@ option:not(:checked) {
     background-size: cover;
     -o-background-size: cover;
 }
+
+ *:focus {
+   outline: 0;
+ }
 
 }
