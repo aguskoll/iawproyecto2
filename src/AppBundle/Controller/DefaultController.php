@@ -15,6 +15,7 @@ class DefaultController extends Controller
     {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) 
         {
+           
              return $this->render('default/admin.html.twig');
         }
         else{
@@ -30,9 +31,12 @@ class DefaultController extends Controller
      */
     public function homeAction(Request $request)
     {
-        // replace this example code with whatever you need
+      
         return $this->render('default/index.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         ));
     }
+    
+      
+   
 }

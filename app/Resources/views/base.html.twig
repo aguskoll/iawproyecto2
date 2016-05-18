@@ -73,7 +73,7 @@
                              {% if is_granted('ROLE_ADMIN') %}
                                   {% if app.request.get('_route') == 'homepage' %}
                                         <li>
-                                           <a   class=" page-scroll" href="{{ path('home') }}">
+                                           <a   class=" page-scroll" href="{{ path('homeAdmin') }}">
                                                <i class="glyphicon glyphicon-home"></i> {{ 'Home'|trans }}
                                            </a>
                                        </li>
@@ -161,7 +161,7 @@
 {#{<script src="../../dist/js/bootstrap.min.js"></script>}#}
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 {#{ <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>}#}
-{#{<script src="http://maps.googleapis.com/maps/api/js"></script>}#}
+<script src="http://maps.googleapis.com/maps/api/js"></script>
 <script src="{{ asset('js/pruebas.js') }}"></script>
 <!-- jQuery -->
 <script src="{{asset('js/jquery.js')}}"></script>
@@ -173,8 +173,6 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="{{asset('js/grayscale.js')}}"></script>
-<!-- Script to Activate the Carousel -->
-<!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
 
 
 {% block script %}{% endblock %}

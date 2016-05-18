@@ -152,6 +152,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'AppBundle\\Controller\\AdminController::agregarJugador',  '_route' => 'agregarJugador',);
             }
 
+            // homeAdmin
+            if ($pathinfo === '/admin/home') {
+                return array (  '_controller' => 'AppBundle\\Controller\\AdminController::homeAdminAction',  '_route' => 'homeAdmin',);
+            }
+
         }
 
         // homepage
