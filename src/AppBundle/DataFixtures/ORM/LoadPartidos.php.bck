@@ -56,7 +56,7 @@ class LoadPartidos extends  AbstractFixture implements OrderedFixtureInterface{
         
         $partido4 = new Partido();
         $partido4->setEquipo1($this->getReference('equipo2'));
-        $partido4->setEquipo2($this->getReference('equipo1'));
+        $partido4->setEquipo2($this->getReference('equipo3'));
         $partido4->setPuntosEquipo1(5);
         $partido4->setPuntosEquipo2(13);
         $partido4->setTermino(true);
@@ -73,6 +73,49 @@ class LoadPartidos extends  AbstractFixture implements OrderedFixtureInterface{
         $manager->persist($partido5);
         $manager->flush();
          
+
+         //por cargar
+        $partido = new Partido();
+        $partido->setEquipo1($this->getReference('equipo2'));
+        $partido->setEquipo2($this->getReference('equipo4'));
+        $partido->setTermino(false);
+        $manager->persist($partido);
+        
+        $partido2 = new Partido();
+        $partido2->setEquipo1($this->getReference('equipo2'));
+        $partido2->setEquipo2($this->getReference('equipo5'));
+        $partido2->setTermino(false);
+        $manager->persist($partido2);
+        
+        
+        $partido3 = new Partido();
+        $partido3->setEquipo1($this->getReference('equipo1'));
+        $partido3->setEquipo2($this->getReference('equipo4'));
+        $partido3->setPuntosEquipo1(5);
+        $partido3->setPuntosEquipo2(13);
+        $partido3->setTermino(true);
+        //  $partido3->setEditor($this->getReference('editor1'));
+        $manager->persist($partido3);
+        
+        $partido4 = new Partido();
+        $partido4->setEquipo1($this->getReference('equipo2'));
+        $partido4->setEquipo2($this->getReference('equipo1'));
+        $partido4->setPuntosEquipo1(5);
+        $partido4->setPuntosEquipo2(13);
+        $partido4->setTermino(true);
+        //$partido4->setEditor($this->getReference('editor2'));
+        $manager->persist($partido4);
+        
+        $partido5 = new Partido();
+        $partido5->setEquipo1($this->getReference('equipo2'));
+        $partido5->setEquipo2($this->getReference('equipo3'));
+        $partido5->setPuntosEquipo1(5);
+        $partido5->setPuntosEquipo2(13);
+        $partido5->setTermino(true);
+        
+        $manager->persist($partido5);
+        $manager->flush();
+         //
     }
     public function getOrder()
     {
